@@ -101,18 +101,18 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack vlc-0.8.6a-X-src.tar.bz2
+  unpack vlc-0.8.6b-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./vlc-0.8.6a-X.cygport all
+  cygport ./vlc-0.8.6b-X.cygport all
 
 This will create:
-  /usr/src/java-vlc-0.8.6a-X.tar.bz2
-  /usr/src/python-vlc-0.8.6a-X.tar.bz2
-  /usr/src/vlc-0.8.6a-X-src.tar.bz2
-  /usr/src/vlc-0.8.6a-X.tar.bz2
-  /usr/src/vlc-devel-0.8.6a-X.tar.bz2
+  /usr/src/java-vlc-0.8.6b-X.tar.bz2
+  /usr/src/python-vlc-0.8.6b-X.tar.bz2
+  /usr/src/vlc-0.8.6b-X-src.tar.bz2
+  /usr/src/vlc-0.8.6b-X.tar.bz2
+  /usr/src/vlc-devel-0.8.6b-X.tar.bz2
 
 -------------------------------------------
 
@@ -547,17 +547,17 @@ Files included in the binary packages:
   /usr/lib/vlc/visualization/libvisual_plugin.la
   /usr/lib/vlc/visualization/libxosd_plugin.la
   /usr/share/applications/vlc.desktop
-  /usr/share/doc/Cygwin/vlc-0.8.6a.README
-  /usr/share/doc/vlc-0.8.6a/ABOUT-NLS
-  /usr/share/doc/vlc-0.8.6a/AUTHORS
-  /usr/share/doc/vlc-0.8.6a/COPYING
-  /usr/share/doc/vlc-0.8.6a/ChangeLog
-  /usr/share/doc/vlc-0.8.6a/HACKING
-  /usr/share/doc/vlc-0.8.6a/INSTALL
-  /usr/share/doc/vlc-0.8.6a/MAINTAINERS
-  /usr/share/doc/vlc-0.8.6a/NEWS
-  /usr/share/doc/vlc-0.8.6a/README
-  /usr/share/doc/vlc-0.8.6a/THANKS
+  /usr/share/doc/Cygwin/vlc-0.8.6b.README
+  /usr/share/doc/vlc-0.8.6b/ABOUT-NLS
+  /usr/share/doc/vlc-0.8.6b/AUTHORS
+  /usr/share/doc/vlc-0.8.6b/COPYING
+  /usr/share/doc/vlc-0.8.6b/ChangeLog
+  /usr/share/doc/vlc-0.8.6b/HACKING
+  /usr/share/doc/vlc-0.8.6b/INSTALL
+  /usr/share/doc/vlc-0.8.6b/MAINTAINERS
+  /usr/share/doc/vlc-0.8.6b/NEWS
+  /usr/share/doc/vlc-0.8.6b/README
+  /usr/share/doc/vlc-0.8.6b/THANKS
   /usr/share/doc/vlc/bugreport-howto.txt
   /usr/share/doc/vlc/fortunes.txt
   /usr/share/doc/vlc/intf-cdda.txt
@@ -785,6 +785,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 0.8.6b-1 -----
+Version bump.
 
 ----- version 0.8.6a-1 -----
 Initial release for Cygwin.
