@@ -9,7 +9,6 @@ high-bandwidth network.
 Runtime requirements:
   cygwin-1.5.24-2
   ORBit2-2.14.5-1
-  arts-1.5.6-1
   gdk-pixbuf2-2.10.9-1
   glib2-2.12.9-1
   gnome-vfs2-2.16.2-1
@@ -50,6 +49,7 @@ Runtime requirements:
   libmpcdec3-1.2.4-1
   libmpeg2_0-0.4.0b-1
   libncurses8-5.5-3
+  libnotify-0.4.4-1
   libogg0-1.1.2-1
   libpng12-1.2.12-1
   libpostproc51-20070413-1
@@ -71,7 +71,7 @@ Runtime requirements:
   classpath-0.93-1
   jamvm-1.4.5-1
 (python-vlc)
-  python-2.4.3-1
+  python-2.5.1-1
 
 Build requirements:
 (besides corresponding -devel packages)
@@ -101,18 +101,18 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack vlc-0.8.6b-X-src.tar.bz2
+  unpack vlc-0.8.6c-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./vlc-0.8.6b-X.cygport all
+  cygport ./vlc-0.8.6c-X.cygport all
 
 This will create:
-  /usr/src/java-vlc-0.8.6b-X.tar.bz2
-  /usr/src/python-vlc-0.8.6b-X.tar.bz2
-  /usr/src/vlc-0.8.6b-X-src.tar.bz2
-  /usr/src/vlc-0.8.6b-X.tar.bz2
-  /usr/src/vlc-devel-0.8.6b-X.tar.bz2
+  /usr/src/java-vlc-0.8.6c-X.tar.bz2
+  /usr/src/python-vlc-0.8.6c-X.tar.bz2
+  /usr/src/vlc-0.8.6c-X-src.tar.bz2
+  /usr/src/vlc-0.8.6c-X.tar.bz2
+  /usr/src/vlc-devel-0.8.6c-X.tar.bz2
 
 -------------------------------------------
 
@@ -232,13 +232,9 @@ Files included in the binary packages:
   /usr/lib/vlc/audio_mixer/libtrivial_mixer_plugin.la
   /usr/lib/vlc/audio_output/cygaout_file_plugin.dll
   /usr/lib/vlc/audio_output/cygaout_sdl_plugin.dll
-  /usr/lib/vlc/audio_output/cygarts_plugin.dll
-  /usr/lib/vlc/audio_output/cygesd_plugin.dll
   /usr/lib/vlc/audio_output/cygoss_plugin.dll
   /usr/lib/vlc/audio_output/libaout_file_plugin.la
   /usr/lib/vlc/audio_output/libaout_sdl_plugin.la
-  /usr/lib/vlc/audio_output/libarts_plugin.la
-  /usr/lib/vlc/audio_output/libesd_plugin.la
   /usr/lib/vlc/audio_output/liboss_plugin.la
   /usr/lib/vlc/codec/cyga52_plugin.dll
   /usr/lib/vlc/codec/cygadpcm_plugin.dll
@@ -383,8 +379,10 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/libwav_plugin.la
   /usr/lib/vlc/demux/libxa_plugin.la
   /usr/lib/vlc/gui/cygncurses_plugin.dll
+  /usr/lib/vlc/gui/cygskins2_plugin.dll
   /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
   /usr/lib/vlc/gui/libncurses_plugin.la
+  /usr/lib/vlc/gui/libskins2_plugin.la
   /usr/lib/vlc/gui/libwxwidgets_plugin.la
   /usr/lib/vlc/misc/cygdummy_plugin.dll
   /usr/lib/vlc/misc/cygexport_plugin.dll
@@ -394,6 +392,7 @@ Files included in the binary packages:
   /usr/lib/vlc/misc/cygipv4_plugin.dll
   /usr/lib/vlc/misc/cyglogger_plugin.dll
   /usr/lib/vlc/misc/cygmemcpy_plugin.dll
+  /usr/lib/vlc/misc/cygnotify_plugin.dll
   /usr/lib/vlc/misc/cygscreensaver_plugin.dll
   /usr/lib/vlc/misc/cygsvg_plugin.dll
   /usr/lib/vlc/misc/cygtest1_plugin.dll
@@ -411,6 +410,7 @@ Files included in the binary packages:
   /usr/lib/vlc/misc/libipv4_plugin.la
   /usr/lib/vlc/misc/liblogger_plugin.la
   /usr/lib/vlc/misc/libmemcpy_plugin.la
+  /usr/lib/vlc/misc/libnotify_plugin.la
   /usr/lib/vlc/misc/libscreensaver_plugin.la
   /usr/lib/vlc/misc/libsvg_plugin.la
   /usr/lib/vlc/misc/libtest1_plugin.la
@@ -547,17 +547,17 @@ Files included in the binary packages:
   /usr/lib/vlc/visualization/libvisual_plugin.la
   /usr/lib/vlc/visualization/libxosd_plugin.la
   /usr/share/applications/vlc.desktop
-  /usr/share/doc/Cygwin/vlc-0.8.6b.README
-  /usr/share/doc/vlc-0.8.6b/ABOUT-NLS
-  /usr/share/doc/vlc-0.8.6b/AUTHORS
-  /usr/share/doc/vlc-0.8.6b/COPYING
-  /usr/share/doc/vlc-0.8.6b/ChangeLog
-  /usr/share/doc/vlc-0.8.6b/HACKING
-  /usr/share/doc/vlc-0.8.6b/INSTALL
-  /usr/share/doc/vlc-0.8.6b/MAINTAINERS
-  /usr/share/doc/vlc-0.8.6b/NEWS
-  /usr/share/doc/vlc-0.8.6b/README
-  /usr/share/doc/vlc-0.8.6b/THANKS
+  /usr/share/doc/Cygwin/vlc-0.8.6c.README
+  /usr/share/doc/vlc-0.8.6c/ABOUT-NLS
+  /usr/share/doc/vlc-0.8.6c/AUTHORS
+  /usr/share/doc/vlc-0.8.6c/COPYING
+  /usr/share/doc/vlc-0.8.6c/ChangeLog
+  /usr/share/doc/vlc-0.8.6c/HACKING
+  /usr/share/doc/vlc-0.8.6c/INSTALL
+  /usr/share/doc/vlc-0.8.6c/MAINTAINERS
+  /usr/share/doc/vlc-0.8.6c/NEWS
+  /usr/share/doc/vlc-0.8.6c/README
+  /usr/share/doc/vlc-0.8.6c/THANKS
   /usr/share/doc/vlc/bugreport-howto.txt
   /usr/share/doc/vlc/fortunes.txt
   /usr/share/doc/vlc/intf-cdda.txt
@@ -780,11 +780,16 @@ Files included in the binary packages:
 
 (python-vlc)
   /usr/bin/vlcwrapper.py
-  /usr/lib/python2.4/site-packages/vlc.dll
+  /usr/lib/python2.5/site-packages/vlc.dll
 
 ------------------
 
 Port Notes:
+
+----- version 0.8.6c-1 -----
+Version bump.
+Enabled libnotify and skins2; disabled arts and esd.
+Python bindings built for python-2.5.
 
 ----- version 0.8.6b-1 -----
 Version bump.
