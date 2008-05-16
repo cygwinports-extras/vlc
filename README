@@ -8,11 +8,9 @@ high-bandwidth network.
 
 Runtime requirements:
   cygwin-1.5.25-11
-  atk-1.20.0-1
   gdk-pixbuf2-2.12.9-1
   glib2-2.14.6-1
   gnome-vfs2-2.20.1-1
-  gtk2-x11-2.12.9-1
   libFLAC8-1.2.1-2
   libGL1-7.0.3-1
   libGLU1-7.0.3-1
@@ -104,18 +102,18 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack vlc-0.8.6c-X-src.tar.bz2
+  unpack vlc-0.8.6g-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./vlc-0.8.6c-X.cygport all
+  cygport ./vlc-0.8.6g-X.cygport all
 
 This will create:
-  /usr/src/java-vlc-0.8.6c-X.tar.bz2
-  /usr/src/python-vlc-0.8.6c-X.tar.bz2
-  /usr/src/vlc-0.8.6c-X-src.tar.bz2
-  /usr/src/vlc-0.8.6c-X.tar.bz2
-  /usr/src/vlc-devel-0.8.6c-X.tar.bz2
+  /usr/src/java-vlc-0.8.6g-X.tar.bz2
+  /usr/src/python-vlc-0.8.6g-X.tar.bz2
+  /usr/src/vlc-0.8.6g-X-src.tar.bz2
+  /usr/src/vlc-0.8.6g-X.tar.bz2
+  /usr/src/vlc-devel-0.8.6g-X.tar.bz2
 
 -------------------------------------------
 
@@ -392,9 +390,7 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/libwav_plugin.la
   /usr/lib/vlc/demux/libxa_plugin.la
   /usr/lib/vlc/gui/cygncurses_plugin.dll
-  /usr/lib/vlc/gui/cygpda_plugin.dll
   /usr/lib/vlc/gui/libncurses_plugin.la
-  /usr/lib/vlc/gui/libpda_plugin.la
   /usr/lib/vlc/misc/cygdummy_plugin.dll
   /usr/lib/vlc/misc/cygexport_plugin.dll
   /usr/lib/vlc/misc/cygfreetype_plugin.dll
@@ -552,20 +548,20 @@ Files included in the binary packages:
   /usr/lib/vlc/visualization/libvisual_plugin.la
   /usr/lib/vlc/visualization/libxosd_plugin.la
   /usr/share/applications/vlc.desktop
-  /usr/share/doc/vlc-0.8.6f/ABOUT-NLS
-  /usr/share/doc/vlc-0.8.6f/AUTHORS
-  /usr/share/doc/vlc-0.8.6f/COPYING
-  /usr/share/doc/vlc-0.8.6f/ChangeLog
-  /usr/share/doc/vlc-0.8.6f/HACKING
-  /usr/share/doc/vlc-0.8.6f/INSTALL
-  /usr/share/doc/vlc-0.8.6f/MAINTAINERS
-  /usr/share/doc/vlc-0.8.6f/NEWS
-  /usr/share/doc/vlc-0.8.6f/README
-  /usr/share/doc/vlc-0.8.6f/THANKS
-  /usr/share/doc/vlc-0.8.6f/bugreport-howto.txt
-  /usr/share/doc/vlc-0.8.6f/fortunes.txt
-  /usr/share/doc/vlc-0.8.6f/intf-cdda.txt
-  /usr/share/doc/vlc-0.8.6f/intf-vcd.txt
+  /usr/share/doc/vlc-0.8.6g/ABOUT-NLS
+  /usr/share/doc/vlc-0.8.6g/AUTHORS
+  /usr/share/doc/vlc-0.8.6g/COPYING
+  /usr/share/doc/vlc-0.8.6g/ChangeLog
+  /usr/share/doc/vlc-0.8.6g/HACKING
+  /usr/share/doc/vlc-0.8.6g/INSTALL
+  /usr/share/doc/vlc-0.8.6g/MAINTAINERS
+  /usr/share/doc/vlc-0.8.6g/NEWS
+  /usr/share/doc/vlc-0.8.6g/README
+  /usr/share/doc/vlc-0.8.6g/THANKS
+  /usr/share/doc/vlc-0.8.6g/bugreport-howto.txt
+  /usr/share/doc/vlc-0.8.6g/fortunes.txt
+  /usr/share/doc/vlc-0.8.6g/intf-cdda.txt
+  /usr/share/doc/vlc-0.8.6g/intf-vcd.txt
   /usr/share/locale/af/LC_MESSAGES/vlc.mo
   /usr/share/locale/ar/LC_MESSAGES/vlc.mo
   /usr/share/locale/ca/LC_MESSAGES/vlc.mo
@@ -792,10 +788,10 @@ Files included in the binary packages:
 
 Port Notes:
 
------ version 0.8.6f-1 -----
+----- version 0.8.6g-1 -----
 Version bump.
 The wxWidgets GUI now requires a Unicode build, which cygwin-1.5 cannot
-provide.  Therefore the available GUIs are now: pda, ncurses, rc.
+provide.  Therefore the default GUI is now ncurses.
 Added plugins: goom, real.
 Added mozilla browser plugin.
 
