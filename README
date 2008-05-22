@@ -11,6 +11,7 @@ Runtime requirements:
   gdk-pixbuf2-2.12.9-1
   glib2-2.14.6-1
   gnome-vfs2-2.20.1-1
+  gtk2-x11-2.12.9-1
   libFLAC8-1.2.1-2
   libGL1-7.0.3-1
   libGLU1-7.0.3-1
@@ -67,6 +68,8 @@ Runtime requirements:
   libx264_56-680-1
   libxml2-2.6.32-1
   libxosd2-2.2.14-1
+  wx26-base-2.6.4-3
+  wx26-gtk2-2.6.4-3
   zlib-1.2.3-2
 (java-vlc)
   classpath-0.93-1
@@ -390,7 +393,11 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/libwav_plugin.la
   /usr/lib/vlc/demux/libxa_plugin.la
   /usr/lib/vlc/gui/cygncurses_plugin.dll
+  /usr/lib/vlc/gui/cygskins2_plugin.dll
+  /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
   /usr/lib/vlc/gui/libncurses_plugin.la
+  /usr/lib/vlc/gui/libskins2_plugin.la
+  /usr/lib/vlc/gui/libwxwidgets_plugin.la
   /usr/lib/vlc/misc/cygdummy_plugin.dll
   /usr/lib/vlc/misc/cygexport_plugin.dll
   /usr/lib/vlc/misc/cygfreetype_plugin.dll
@@ -790,8 +797,6 @@ Port Notes:
 
 ----- version 0.8.6g-1 -----
 Version bump.
-The wxWidgets GUI now requires a Unicode build, which cygwin-1.5 cannot
-provide.  Therefore the default GUI is now ncurses.
 Added plugins: goom, real.
 Added mozilla browser plugin.
 
