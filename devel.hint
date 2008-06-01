@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin gettext libiconv libdvbpsi-devel libogg-devel libtheora-devel
+requires: cygwin gettext libiconv libdvbpsi-devel libtheora-devel
 external-source: vlc
 sdesc: "VideoLAN multimedia player (development)"
 ldesc: "VLC media player is a highly portable multimedia player for 
