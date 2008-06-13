@@ -8,6 +8,15 @@ high-bandwidth network.
 
 Runtime requirements:
   cygwin-1.5.25-11
+  libiconv2-1.11-1
+  libintl8-0.15-1
+  zlib-1.2.3-2
+(java-vlc)
+  classpath-0.93-1
+  jamvm-1.4.5-1
+(python-vlc)
+  python-2.5.2-1
+(vlc-plugin-*)
   font-dejavu-ttf-2.24-1
   gdk-pixbuf2-2.12.9-1
   glib2-2.16.3-1
@@ -20,7 +29,6 @@ Runtime requirements:
   libSDL_image-1.2.6-1
   libX11_6-1.1.3-1
   libXext6-1.0.3-1
-  libXt6-1.0.5-1
   liba52_0-0.7.4-3
   libaa1-1.4rc5-1
   libavcodec51-13270-1
@@ -32,7 +40,6 @@ Runtime requirements:
   libcdio_cdda0-0.80-2
   libcdio_paranoia0-0.80-2
   libdca0-0.0.5-2
-  libdirac0-0.9.1-1
   libdvbpsi5-0.1.6-1
   libdvdnav4-0.1.10-1
   libdvdread3-0.9.7-1
@@ -44,9 +51,7 @@ Runtime requirements:
   libggi2-2.2.1-1
   libgnutls26-2.2.2-1
   libgoom2_0-2004.0-1
-  libiconv2-1.11-1
   libid3tag0-0.15.1b-4
-  libintl8-0.15-1
   libmad-0.15.1b-3
   libmatroska0-0.8.1-1
   libmodplug0-0.8.4-2
@@ -55,13 +60,14 @@ Runtime requirements:
   libncurses8-5.5-3
   libnotify-0.4.4-1
   libogg0-1.1.3-1
-  libpng12-1.2.27-1
+  libpng12-1.2.29-1
+  libportaudio2-19.20071207-1
   libpostproc51-13270-1
-  librsvg2-2.20.0-1
+  librsvg2-2.22.2-1
   libshout3-2.2.2-1
   libspeex1-1.2beta2-1
   libtar0-1.2.11-1
-  libtheora0-1.0beta2-1
+  libtheora0-1.0beta3-1
   libtwolame0-0.3.12-1
   libvcdinfo0-0.7.23-2
   libvorbis0-1.2.0-1
@@ -71,12 +77,6 @@ Runtime requirements:
   libxosd2-2.2.14-1
   wx26-base-2.6.4-3
   wx26-gtk2-2.6.4-3
-  zlib-1.2.3-2
-(java-vlc)
-  classpath-0.93-1
-  jamvm-1.4.5-1
-(python-vlc)
-  python-2.5.2-1
 
 Build requirements:
 (besides corresponding -devel packages)
@@ -95,7 +95,6 @@ Build requirements:
   make-3.81-1
   pkg-config-0.21-1
   sed-4.1.5-2
-  xulrunner-devel-1.8.1.14-1
 
 Canonical website:
   http://www.videolan.org/vlc/
@@ -118,6 +117,7 @@ This will create:
   /usr/src/vlc-0.8.6g-X-src.tar.bz2
   /usr/src/vlc-0.8.6g-X.tar.bz2
   /usr/src/vlc-devel-0.8.6g-X.tar.bz2
+  /usr/src/vlc-plugin-*-0.8.6g-X.tar.bz2
 
 -------------------------------------------
 
@@ -127,38 +127,26 @@ Files included in the binary packages:
   /etc/postinstall/vlc.sh
   /usr/bin/cygvlc-0.dll
   /usr/bin/vlc.exe
-  /usr/lib/mozilla/plugins/cygvlcplugin.dll
-  /usr/lib/mozilla/plugins/libvlcplugin.la
+  /usr/bin/svlc
+  /usr/bin/wxvlc
   /usr/lib/vlc/access/cygaccess_directory_plugin.dll
   /usr/lib/vlc/access/cygaccess_fake_plugin.dll
   /usr/lib/vlc/access/cygaccess_file_plugin.dll
   /usr/lib/vlc/access/cygaccess_ftp_plugin.dll
-  /usr/lib/vlc/access/cygaccess_gnomevfs_plugin.dll
   /usr/lib/vlc/access/cygaccess_http_plugin.dll
   /usr/lib/vlc/access/cygaccess_mms_plugin.dll
   /usr/lib/vlc/access/cygaccess_realrtsp_plugin.dll
   /usr/lib/vlc/access/cygaccess_tcp_plugin.dll
   /usr/lib/vlc/access/cygaccess_udp_plugin.dll
-  /usr/lib/vlc/access/cygcddax_plugin.dll
-  /usr/lib/vlc/access/cygdvdnav_plugin.dll
-  /usr/lib/vlc/access/cygdvdread_plugin.dll
-  /usr/lib/vlc/access/cygscreen_plugin.dll
-  /usr/lib/vlc/access/cygvcdx_plugin.dll
   /usr/lib/vlc/access/libaccess_directory_plugin.la
   /usr/lib/vlc/access/libaccess_fake_plugin.la
   /usr/lib/vlc/access/libaccess_file_plugin.la
   /usr/lib/vlc/access/libaccess_ftp_plugin.la
-  /usr/lib/vlc/access/libaccess_gnomevfs_plugin.la
   /usr/lib/vlc/access/libaccess_http_plugin.la
   /usr/lib/vlc/access/libaccess_mms_plugin.la
   /usr/lib/vlc/access/libaccess_realrtsp_plugin.la
   /usr/lib/vlc/access/libaccess_tcp_plugin.la
   /usr/lib/vlc/access/libaccess_udp_plugin.la
-  /usr/lib/vlc/access/libcddax_plugin.la
-  /usr/lib/vlc/access/libdvdnav_plugin.la
-  /usr/lib/vlc/access/libdvdread_plugin.la
-  /usr/lib/vlc/access/libscreen_plugin.la
-  /usr/lib/vlc/access/libvcdx_plugin.la
   /usr/lib/vlc/access_filter/cygaccess_filter_dump_plugin.dll
   /usr/lib/vlc/access_filter/cygaccess_filter_record_plugin.dll
   /usr/lib/vlc/access_filter/cygaccess_filter_timeshift_plugin.dll
@@ -168,19 +156,15 @@ Files included in the binary packages:
   /usr/lib/vlc/access_output/cygaccess_output_dummy_plugin.dll
   /usr/lib/vlc/access_output/cygaccess_output_file_plugin.dll
   /usr/lib/vlc/access_output/cygaccess_output_http_plugin.dll
-  /usr/lib/vlc/access_output/cygaccess_output_shout_plugin.dll
   /usr/lib/vlc/access_output/cygaccess_output_udp_plugin.dll
   /usr/lib/vlc/access_output/libaccess_output_dummy_plugin.la
   /usr/lib/vlc/access_output/libaccess_output_file_plugin.la
   /usr/lib/vlc/access_output/libaccess_output_http_plugin.la
-  /usr/lib/vlc/access_output/libaccess_output_shout_plugin.la
   /usr/lib/vlc/access_output/libaccess_output_udp_plugin.la
-  /usr/lib/vlc/audio_filter/cyga52tofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cyga52tospdif_plugin.dll
   /usr/lib/vlc/audio_filter/cygaudio_format_plugin.dll
   /usr/lib/vlc/audio_filter/cygbandlimited_resampler_plugin.dll
   /usr/lib/vlc/audio_filter/cygdolby_surround_decoder_plugin.dll
-  /usr/lib/vlc/audio_filter/cygdtstofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cygdtstospdif_plugin.dll
   /usr/lib/vlc/audio_filter/cygequalizer_plugin.dll
   /usr/lib/vlc/audio_filter/cygfixed32tofloat32_plugin.dll
@@ -191,12 +175,11 @@ Files included in the binary packages:
   /usr/lib/vlc/audio_filter/cygfloat32tou8_plugin.dll
   /usr/lib/vlc/audio_filter/cygheadphone_channel_mixer_plugin.dll
   /usr/lib/vlc/audio_filter/cyglinear_resampler_plugin.dll
-  /usr/lib/vlc/audio_filter/cygmpgatofixed32_plugin.dll
   /usr/lib/vlc/audio_filter/cygnormvol_plugin.dll
   /usr/lib/vlc/audio_filter/cygparam_eq_plugin.dll
   /usr/lib/vlc/audio_filter/cygs16tofixed32_plugin.dll
-  /usr/lib/vlc/audio_filter/cygs16tofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cygs16tofloat32swab_plugin.dll
+  /usr/lib/vlc/audio_filter/cygs16tofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cygs8tofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cygsimple_channel_mixer_plugin.dll
   /usr/lib/vlc/audio_filter/cygtrivial_channel_mixer_plugin.dll
@@ -204,12 +187,10 @@ Files included in the binary packages:
   /usr/lib/vlc/audio_filter/cygu8tofixed32_plugin.dll
   /usr/lib/vlc/audio_filter/cygu8tofloat32_plugin.dll
   /usr/lib/vlc/audio_filter/cygugly_resampler_plugin.dll
-  /usr/lib/vlc/audio_filter/liba52tofloat32_plugin.la
   /usr/lib/vlc/audio_filter/liba52tospdif_plugin.la
   /usr/lib/vlc/audio_filter/libaudio_format_plugin.la
   /usr/lib/vlc/audio_filter/libbandlimited_resampler_plugin.la
   /usr/lib/vlc/audio_filter/libdolby_surround_decoder_plugin.la
-  /usr/lib/vlc/audio_filter/libdtstofloat32_plugin.la
   /usr/lib/vlc/audio_filter/libdtstospdif_plugin.la
   /usr/lib/vlc/audio_filter/libequalizer_plugin.la
   /usr/lib/vlc/audio_filter/libfixed32tofloat32_plugin.la
@@ -220,12 +201,11 @@ Files included in the binary packages:
   /usr/lib/vlc/audio_filter/libfloat32tou8_plugin.la
   /usr/lib/vlc/audio_filter/libheadphone_channel_mixer_plugin.la
   /usr/lib/vlc/audio_filter/liblinear_resampler_plugin.la
-  /usr/lib/vlc/audio_filter/libmpgatofixed32_plugin.la
   /usr/lib/vlc/audio_filter/libnormvol_plugin.la
   /usr/lib/vlc/audio_filter/libparam_eq_plugin.la
   /usr/lib/vlc/audio_filter/libs16tofixed32_plugin.la
-  /usr/lib/vlc/audio_filter/libs16tofloat32_plugin.la
   /usr/lib/vlc/audio_filter/libs16tofloat32swab_plugin.la
+  /usr/lib/vlc/audio_filter/libs16tofloat32_plugin.la
   /usr/lib/vlc/audio_filter/libs8tofloat32_plugin.la
   /usr/lib/vlc/audio_filter/libsimple_channel_mixer_plugin.la
   /usr/lib/vlc/audio_filter/libtrivial_channel_mixer_plugin.la
@@ -240,11 +220,9 @@ Files included in the binary packages:
   /usr/lib/vlc/audio_mixer/libspdif_mixer_plugin.la
   /usr/lib/vlc/audio_mixer/libtrivial_mixer_plugin.la
   /usr/lib/vlc/audio_output/cygaout_file_plugin.dll
-  /usr/lib/vlc/audio_output/cygaout_sdl_plugin.dll
   /usr/lib/vlc/audio_output/cygoss_plugin.dll
   /usr/lib/vlc/audio_output/cygwaveout_plugin.dll
   /usr/lib/vlc/audio_output/libaout_file_plugin.la
-  /usr/lib/vlc/audio_output/libaout_sdl_plugin.la
   /usr/lib/vlc/audio_output/liboss_plugin.la
   /usr/lib/vlc/audio_output/libwaveout_plugin.la
   /usr/lib/vlc/codec/cyga52_plugin.dll
@@ -253,58 +231,34 @@ Files included in the binary packages:
   /usr/lib/vlc/codec/cygcinepak_plugin.dll
   /usr/lib/vlc/codec/cygcmml_plugin.dll
   /usr/lib/vlc/codec/cygcvdsub_plugin.dll
-  /usr/lib/vlc/codec/cygdirac_plugin.dll
   /usr/lib/vlc/codec/cygdts_plugin.dll
   /usr/lib/vlc/codec/cygdvbsub_plugin.dll
-  /usr/lib/vlc/codec/cygfaad_plugin.dll
   /usr/lib/vlc/codec/cygfake_plugin.dll
-  /usr/lib/vlc/codec/cygffmpeg_plugin.dll
-  /usr/lib/vlc/codec/cygflacdec_plugin.dll
-  /usr/lib/vlc/codec/cyglibmpeg2_plugin.dll
   /usr/lib/vlc/codec/cyglpcm_plugin.dll
   /usr/lib/vlc/codec/cygmpeg_audio_plugin.dll
-  /usr/lib/vlc/codec/cygpng_plugin.dll
   /usr/lib/vlc/codec/cygrawvideo_plugin.dll
   /usr/lib/vlc/codec/cygrealaudio_plugin.dll
-  /usr/lib/vlc/codec/cygsdl_image_plugin.dll
-  /usr/lib/vlc/codec/cygspeex_plugin.dll
   /usr/lib/vlc/codec/cygspudec_plugin.dll
   /usr/lib/vlc/codec/cygsubsdec_plugin.dll
   /usr/lib/vlc/codec/cygsvcdsub_plugin.dll
   /usr/lib/vlc/codec/cygtelx_plugin.dll
-  /usr/lib/vlc/codec/cygtheora_plugin.dll
-  /usr/lib/vlc/codec/cygtwolame_plugin.dll
-  /usr/lib/vlc/codec/cygvorbis_plugin.dll
-  /usr/lib/vlc/codec/cygx264_plugin.dll
   /usr/lib/vlc/codec/liba52_plugin.la
   /usr/lib/vlc/codec/libadpcm_plugin.la
   /usr/lib/vlc/codec/libaraw_plugin.la
   /usr/lib/vlc/codec/libcinepak_plugin.la
   /usr/lib/vlc/codec/libcmml_plugin.la
   /usr/lib/vlc/codec/libcvdsub_plugin.la
-  /usr/lib/vlc/codec/libdirac_plugin.la
   /usr/lib/vlc/codec/libdts_plugin.la
   /usr/lib/vlc/codec/libdvbsub_plugin.la
-  /usr/lib/vlc/codec/libfaad_plugin.la
   /usr/lib/vlc/codec/libfake_plugin.la
-  /usr/lib/vlc/codec/libffmpeg_plugin.la
-  /usr/lib/vlc/codec/libflacdec_plugin.la
-  /usr/lib/vlc/codec/liblibmpeg2_plugin.la
   /usr/lib/vlc/codec/liblpcm_plugin.la
   /usr/lib/vlc/codec/libmpeg_audio_plugin.la
-  /usr/lib/vlc/codec/libpng_plugin.la
   /usr/lib/vlc/codec/librawvideo_plugin.la
   /usr/lib/vlc/codec/librealaudio_plugin.la
-  /usr/lib/vlc/codec/libsdl_image_plugin.la
-  /usr/lib/vlc/codec/libspeex_plugin.la
   /usr/lib/vlc/codec/libspudec_plugin.la
   /usr/lib/vlc/codec/libsubsdec_plugin.la
   /usr/lib/vlc/codec/libsvcdsub_plugin.la
   /usr/lib/vlc/codec/libtelx_plugin.la
-  /usr/lib/vlc/codec/libtheora_plugin.la
-  /usr/lib/vlc/codec/libtwolame_plugin.la
-  /usr/lib/vlc/codec/libvorbis_plugin.la
-  /usr/lib/vlc/codec/libx264_plugin.la
   /usr/lib/vlc/control/cyggestures_plugin.dll
   /usr/lib/vlc/control/cyghotkeys_plugin.dll
   /usr/lib/vlc/control/cyghttp_plugin.dll
@@ -328,21 +282,16 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/cygdtssys_plugin.dll
   /usr/lib/vlc/demux/cygflac_plugin.dll
   /usr/lib/vlc/demux/cygh264_plugin.dll
-  /usr/lib/vlc/demux/cygid3tag_plugin.dll
   /usr/lib/vlc/demux/cygm3u_plugin.dll
   /usr/lib/vlc/demux/cygm4a_plugin.dll
   /usr/lib/vlc/demux/cygm4v_plugin.dll
   /usr/lib/vlc/demux/cygmjpeg_plugin.dll
-  /usr/lib/vlc/demux/cygmkv_plugin.dll
-  /usr/lib/vlc/demux/cygmod_plugin.dll
   /usr/lib/vlc/demux/cygmp4_plugin.dll
-  /usr/lib/vlc/demux/cygmpc_plugin.dll
   /usr/lib/vlc/demux/cygmpga_plugin.dll
   /usr/lib/vlc/demux/cygmpgv_plugin.dll
   /usr/lib/vlc/demux/cygnsc_plugin.dll
   /usr/lib/vlc/demux/cygnsv_plugin.dll
   /usr/lib/vlc/demux/cygnuv_plugin.dll
-  /usr/lib/vlc/demux/cygogg_plugin.dll
   /usr/lib/vlc/demux/cygplaylist_plugin.dll
   /usr/lib/vlc/demux/cygps_plugin.dll
   /usr/lib/vlc/demux/cygpva_plugin.dll
@@ -350,7 +299,6 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/cygreal_plugin.dll
   /usr/lib/vlc/demux/cygsgimb_plugin.dll
   /usr/lib/vlc/demux/cygsubtitle_plugin.dll
-  /usr/lib/vlc/demux/cygts_plugin.dll
   /usr/lib/vlc/demux/cygtta_plugin.dll
   /usr/lib/vlc/demux/cygty_plugin.dll
   /usr/lib/vlc/demux/cygvobsub_plugin.dll
@@ -366,21 +314,16 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/libdtssys_plugin.la
   /usr/lib/vlc/demux/libflac_plugin.la
   /usr/lib/vlc/demux/libh264_plugin.la
-  /usr/lib/vlc/demux/libid3tag_plugin.la
   /usr/lib/vlc/demux/libm3u_plugin.la
   /usr/lib/vlc/demux/libm4a_plugin.la
   /usr/lib/vlc/demux/libm4v_plugin.la
   /usr/lib/vlc/demux/libmjpeg_plugin.la
-  /usr/lib/vlc/demux/libmkv_plugin.la
-  /usr/lib/vlc/demux/libmod_plugin.la
   /usr/lib/vlc/demux/libmp4_plugin.la
-  /usr/lib/vlc/demux/libmpc_plugin.la
   /usr/lib/vlc/demux/libmpga_plugin.la
   /usr/lib/vlc/demux/libmpgv_plugin.la
   /usr/lib/vlc/demux/libnsc_plugin.la
   /usr/lib/vlc/demux/libnsv_plugin.la
   /usr/lib/vlc/demux/libnuv_plugin.la
-  /usr/lib/vlc/demux/libogg_plugin.la
   /usr/lib/vlc/demux/libplaylist_plugin.la
   /usr/lib/vlc/demux/libps_plugin.la
   /usr/lib/vlc/demux/libpva_plugin.la
@@ -388,64 +331,43 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/libreal_plugin.la
   /usr/lib/vlc/demux/libsgimb_plugin.la
   /usr/lib/vlc/demux/libsubtitle_plugin.la
-  /usr/lib/vlc/demux/libts_plugin.la
   /usr/lib/vlc/demux/libtta_plugin.la
   /usr/lib/vlc/demux/libty_plugin.la
   /usr/lib/vlc/demux/libvobsub_plugin.la
   /usr/lib/vlc/demux/libvoc_plugin.la
   /usr/lib/vlc/demux/libwav_plugin.la
   /usr/lib/vlc/demux/libxa_plugin.la
-  /usr/lib/vlc/gui/cygncurses_plugin.dll
-  /usr/lib/vlc/gui/cygskins2_plugin.dll
-  /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
-  /usr/lib/vlc/gui/libncurses_plugin.la
-  /usr/lib/vlc/gui/libskins2_plugin.la
-  /usr/lib/vlc/gui/libwxwidgets_plugin.la
   /usr/lib/vlc/misc/cygdummy_plugin.dll
   /usr/lib/vlc/misc/cygexport_plugin.dll
-  /usr/lib/vlc/misc/cygfreetype_plugin.dll
-  /usr/lib/vlc/misc/cyggnutls_plugin.dll
   /usr/lib/vlc/misc/cyggrowl_plugin.dll
   /usr/lib/vlc/misc/cygipv4_plugin.dll
   /usr/lib/vlc/misc/cyglogger_plugin.dll
   /usr/lib/vlc/misc/cygmemcpy_plugin.dll
-  /usr/lib/vlc/misc/cygnotify_plugin.dll
   /usr/lib/vlc/misc/cygscreensaver_plugin.dll
-  /usr/lib/vlc/misc/cygsvg_plugin.dll
   /usr/lib/vlc/misc/cygvod_rtsp_plugin.dll
-  /usr/lib/vlc/misc/cygxml_plugin.dll
   /usr/lib/vlc/misc/cygxtag_plugin.dll
   /usr/lib/vlc/misc/libdummy_plugin.la
   /usr/lib/vlc/misc/libexport_plugin.la
-  /usr/lib/vlc/misc/libfreetype_plugin.la
-  /usr/lib/vlc/misc/libgnutls_plugin.la
   /usr/lib/vlc/misc/libgrowl_plugin.la
   /usr/lib/vlc/misc/libipv4_plugin.la
   /usr/lib/vlc/misc/liblogger_plugin.la
   /usr/lib/vlc/misc/libmemcpy_plugin.la
-  /usr/lib/vlc/misc/libnotify_plugin.la
   /usr/lib/vlc/misc/libscreensaver_plugin.la
-  /usr/lib/vlc/misc/libsvg_plugin.la
   /usr/lib/vlc/misc/libvod_rtsp_plugin.la
-  /usr/lib/vlc/misc/libxml_plugin.la
   /usr/lib/vlc/misc/libxtag_plugin.la
   /usr/lib/vlc/mux/cygmux_asf_plugin.dll
   /usr/lib/vlc/mux/cygmux_avi_plugin.dll
   /usr/lib/vlc/mux/cygmux_dummy_plugin.dll
   /usr/lib/vlc/mux/cygmux_mp4_plugin.dll
   /usr/lib/vlc/mux/cygmux_mpjpeg_plugin.dll
-  /usr/lib/vlc/mux/cygmux_ogg_plugin.dll
   /usr/lib/vlc/mux/cygmux_ps_plugin.dll
-  /usr/lib/vlc/mux/cygmux_ts_plugin.dll
   /usr/lib/vlc/mux/cygmux_wav_plugin.dll
   /usr/lib/vlc/mux/libmux_asf_plugin.la
   /usr/lib/vlc/mux/libmux_avi_plugin.la
   /usr/lib/vlc/mux/libmux_dummy_plugin.la
   /usr/lib/vlc/mux/libmux_mp4_plugin.la
   /usr/lib/vlc/mux/libmux_mpjpeg_plugin.la
-  /usr/lib/vlc/mux/libmux_ogg_plugin.la
   /usr/lib/vlc/mux/libmux_ps_plugin.la
-  /usr/lib/vlc/mux/libmux_ts_plugin.la
   /usr/lib/vlc/mux/libmux_wav_plugin.la
   /usr/lib/vlc/packetizer/cygpacketizer_copy_plugin.dll
   /usr/lib/vlc/packetizer/cygpacketizer_h264_plugin.dll
@@ -473,7 +395,6 @@ Files included in the binary packages:
   /usr/lib/vlc/stream_out/cygstream_out_mosaic_bridge_plugin.dll
   /usr/lib/vlc/stream_out/cygstream_out_rtp_plugin.dll
   /usr/lib/vlc/stream_out/cygstream_out_standard_plugin.dll
-  /usr/lib/vlc/stream_out/cygstream_out_switcher_plugin.dll
   /usr/lib/vlc/stream_out/cygstream_out_transcode_plugin.dll
   /usr/lib/vlc/stream_out/libstream_out_bridge_plugin.la
   /usr/lib/vlc/stream_out/libstream_out_description_plugin.la
@@ -485,7 +406,6 @@ Files included in the binary packages:
   /usr/lib/vlc/stream_out/libstream_out_mosaic_bridge_plugin.la
   /usr/lib/vlc/stream_out/libstream_out_rtp_plugin.la
   /usr/lib/vlc/stream_out/libstream_out_standard_plugin.la
-  /usr/lib/vlc/stream_out/libstream_out_switcher_plugin.la
   /usr/lib/vlc/stream_out/libstream_out_transcode_plugin.la
   /usr/lib/vlc/video_chroma/cygi420_rgb_plugin.dll
   /usr/lib/vlc/video_chroma/cygi420_ymga_plugin.dll
@@ -535,45 +455,27 @@ Files included in the binary packages:
   /usr/lib/vlc/video_filter/libtime_plugin.la
   /usr/lib/vlc/video_filter/libtransform_plugin.la
   /usr/lib/vlc/video_filter/libwall_plugin.la
-  /usr/lib/vlc/video_output/cygaa_plugin.dll
-  /usr/lib/vlc/video_output/cygcaca_plugin.dll
-  /usr/lib/vlc/video_output/cygggi_plugin.dll
-  /usr/lib/vlc/video_output/cygglx_plugin.dll
   /usr/lib/vlc/video_output/cygimage_plugin.dll
-  /usr/lib/vlc/video_output/cygopengl_plugin.dll
   /usr/lib/vlc/video_output/cygsnapshot_plugin.dll
-  /usr/lib/vlc/video_output/cygvout_sdl_plugin.dll
-  /usr/lib/vlc/video_output/cygx11_plugin.dll
-  /usr/lib/vlc/video_output/libaa_plugin.la
-  /usr/lib/vlc/video_output/libcaca_plugin.la
-  /usr/lib/vlc/video_output/libggi_plugin.la
-  /usr/lib/vlc/video_output/libglx_plugin.la
   /usr/lib/vlc/video_output/libimage_plugin.la
-  /usr/lib/vlc/video_output/libopengl_plugin.la
   /usr/lib/vlc/video_output/libsnapshot_plugin.la
-  /usr/lib/vlc/video_output/libvout_sdl_plugin.la
-  /usr/lib/vlc/video_output/libx11_plugin.la
-  /usr/lib/vlc/visualization/cyggoom_plugin.dll
   /usr/lib/vlc/visualization/cygvisual_plugin.dll
-  /usr/lib/vlc/visualization/cygxosd_plugin.dll
-  /usr/lib/vlc/visualization/libgoom_plugin.la
   /usr/lib/vlc/visualization/libvisual_plugin.la
-  /usr/lib/vlc/visualization/libxosd_plugin.la
   /usr/share/applications/vlc.desktop
-  /usr/share/doc/vlc-0.8.6g/ABOUT-NLS
-  /usr/share/doc/vlc-0.8.6g/AUTHORS
-  /usr/share/doc/vlc-0.8.6g/COPYING
-  /usr/share/doc/vlc-0.8.6g/ChangeLog
-  /usr/share/doc/vlc-0.8.6g/HACKING
-  /usr/share/doc/vlc-0.8.6g/INSTALL
-  /usr/share/doc/vlc-0.8.6g/MAINTAINERS
-  /usr/share/doc/vlc-0.8.6g/NEWS
-  /usr/share/doc/vlc-0.8.6g/README
-  /usr/share/doc/vlc-0.8.6g/THANKS
-  /usr/share/doc/vlc-0.8.6g/bugreport-howto.txt
-  /usr/share/doc/vlc-0.8.6g/fortunes.txt
-  /usr/share/doc/vlc-0.8.6g/intf-cdda.txt
-  /usr/share/doc/vlc-0.8.6g/intf-vcd.txt
+  /usr/share/doc/vlc-0.8.6h/ABOUT-NLS
+  /usr/share/doc/vlc-0.8.6h/AUTHORS
+  /usr/share/doc/vlc-0.8.6h/bugreport-howto.txt
+  /usr/share/doc/vlc-0.8.6h/ChangeLog
+  /usr/share/doc/vlc-0.8.6h/COPYING
+  /usr/share/doc/vlc-0.8.6h/fortunes.txt
+  /usr/share/doc/vlc-0.8.6h/HACKING
+  /usr/share/doc/vlc-0.8.6h/INSTALL
+  /usr/share/doc/vlc-0.8.6h/intf-cdda.txt
+  /usr/share/doc/vlc-0.8.6h/intf-vcd.txt
+  /usr/share/doc/vlc-0.8.6h/MAINTAINERS
+  /usr/share/doc/vlc-0.8.6h/NEWS
+  /usr/share/doc/vlc-0.8.6h/README
+  /usr/share/doc/vlc-0.8.6h/THANKS
   /usr/share/locale/af/LC_MESSAGES/vlc.mo
   /usr/share/locale/ar/LC_MESSAGES/vlc.mo
   /usr/share/locale/ca/LC_MESSAGES/vlc.mo
@@ -611,6 +513,7 @@ Files included in the binary packages:
   /usr/share/locale/sk/LC_MESSAGES/vlc.mo
   /usr/share/locale/sl/LC_MESSAGES/vlc.mo
   /usr/share/locale/sq/LC_MESSAGES/vlc.mo
+  /usr/share/locale/sr/LC_MESSAGES/vlc.mo
   /usr/share/locale/sv/LC_MESSAGES/vlc.mo
   /usr/share/locale/th/LC_MESSAGES/vlc.mo
   /usr/share/locale/tr/LC_MESSAGES/vlc.mo
@@ -693,7 +596,6 @@ Files included in the binary packages:
   /usr/share/vlc/http/style.css
   /usr/share/vlc/http/vlm.html
   /usr/share/vlc/http/vlm_export.html
-  /usr/share/vlc/osdmenu/default.cfg
   /usr/share/vlc/osdmenu/default/selected/bw.png
   /usr/share/vlc/osdmenu/default/selected/esc.png
   /usr/share/vlc/osdmenu/default/selected/fw.png
@@ -722,7 +624,7 @@ Files included in the binary packages:
   /usr/share/vlc/osdmenu/default/volume/volume_08.png
   /usr/share/vlc/osdmenu/default/volume/volume_09.png
   /usr/share/vlc/osdmenu/default/volume/volume_10.png
-  /usr/share/vlc/osdmenu/dvd.cfg
+  /usr/share/vlc/osdmenu/default.cfg
   /usr/share/vlc/osdmenu/dvd/selected/bw.png
   /usr/share/vlc/osdmenu/dvd/selected/esc.png
   /usr/share/vlc/osdmenu/dvd/selected/fw.png
@@ -751,6 +653,7 @@ Files included in the binary packages:
   /usr/share/vlc/osdmenu/dvd/volume/volume03.png
   /usr/share/vlc/osdmenu/dvd/volume/volume04.png
   /usr/share/vlc/osdmenu/dvd/volume/volume05.png
+  /usr/share/vlc/osdmenu/dvd.cfg
   /usr/share/vlc/pda-forwardb16x16.xpm
   /usr/share/vlc/pda-openb16x16.xpm
   /usr/share/vlc/pda-pauseb16x16.xpm
@@ -788,6 +691,190 @@ Files included in the binary packages:
   /usr/lib/libvlc.dll.a
   /usr/lib/libvlc.la
 
+(vlc-plugin-a52)
+  /usr/lib/vlc/audio_filter/cyga52tofloat32_plugin.dll
+  /usr/lib/vlc/audio_filter/liba52tofloat32_plugin.la
+
+(vlc-plugin-aa)
+  /usr/lib/vlc/video_output/cygaa_plugin.dll
+  /usr/lib/vlc/video_output/libaa_plugin.la
+
+(vlc-plugin-caca)
+  /usr/lib/vlc/video_output/cygcaca_plugin.dll
+  /usr/lib/vlc/video_output/libcaca_plugin.la
+
+(vlc-plugin-cddax)
+  /usr/lib/vlc/access/cygcddax_plugin.dll
+  /usr/lib/vlc/access/libcddax_plugin.la
+
+(vlc-plugin-dts)
+  /usr/lib/vlc/audio_filter/cygdtstofloat32_plugin.dll
+  /usr/lib/vlc/audio_filter/libdtstofloat32_plugin.la
+
+(vlc-plugin-dvbpsi)
+  /usr/lib/vlc/demux/cygts_plugin.dll
+  /usr/lib/vlc/demux/libts_plugin.la
+  /usr/lib/vlc/mux/cygmux_ts_plugin.dll
+  /usr/lib/vlc/mux/libmux_ts_plugin.la
+
+(vlc-plugin-dvdnav)
+  /usr/lib/vlc/access/cygdvdnav_plugin.dll
+  /usr/lib/vlc/access/libdvdnav_plugin.la
+
+(vlc-plugin-dvdread)
+  /usr/lib/vlc/access/cygdvdread_plugin.dll
+  /usr/lib/vlc/access/libdvdread_plugin.la
+
+(vlc-plugin-faad)
+  /usr/lib/vlc/codec/cygfaad_plugin.dll
+  /usr/lib/vlc/codec/libfaad_plugin.la
+
+(vlc-plugin-ffmpeg)
+  /usr/lib/vlc/codec/cygffmpeg_plugin.dll
+  /usr/lib/vlc/codec/libffmpeg_plugin.la
+  /usr/lib/vlc/stream_out/cygstream_out_switcher_plugin.dll
+  /usr/lib/vlc/stream_out/libstream_out_switcher_plugin.la
+
+(vlc-plugin-flac)
+  /usr/lib/vlc/codec/cygflacdec_plugin.dll
+  /usr/lib/vlc/codec/libflacdec_plugin.la
+
+(vlc-plugin-freetype)
+  /usr/lib/vlc/misc/cygfreetype_plugin.dll
+  /usr/lib/vlc/misc/libfreetype_plugin.la
+
+(vlc-plugin-ggi)
+  /usr/lib/vlc/video_output/cygggi_plugin.dll
+  /usr/lib/vlc/video_output/libggi_plugin.la
+
+(vlc-plugin-glx)
+  /usr/lib/vlc/video_output/cygglx_plugin.dll
+  /usr/lib/vlc/video_output/libglx_plugin.la
+
+(vlc-plugin-gnomevfs)
+  /usr/lib/vlc/access/cygaccess_gnomevfs_plugin.dll
+  /usr/lib/vlc/access/libaccess_gnomevfs_plugin.la
+
+(vlc-plugin-gnutls)
+  /usr/lib/vlc/misc/cyggnutls_plugin.dll
+  /usr/lib/vlc/misc/libgnutls_plugin.la
+
+(vlc-plugin-goom)
+  /usr/lib/vlc/visualization/cyggoom_plugin.dll
+  /usr/lib/vlc/visualization/libgoom_plugin.la
+
+(vlc-plugin-libmpeg2)
+  /usr/lib/vlc/codec/cyglibmpeg2_plugin.dll
+  /usr/lib/vlc/codec/liblibmpeg2_plugin.la
+
+(vlc-plugin-mad)
+  /usr/lib/vlc/audio_filter/cygmpgatofixed32_plugin.dll
+  /usr/lib/vlc/audio_filter/libmpgatofixed32_plugin.la
+  /usr/lib/vlc/demux/cygid3tag_plugin.dll
+  /usr/lib/vlc/demux/libid3tag_plugin.la
+
+(vlc-plugin-mkv)
+  /usr/lib/vlc/demux/cygmkv_plugin.dll
+  /usr/lib/vlc/demux/libmkv_plugin.la
+
+(vlc-plugin-mod)
+  /usr/lib/vlc/demux/cygmod_plugin.dll
+  /usr/lib/vlc/demux/libmod_plugin.la
+
+(vlc-plugin-mpc)
+  /usr/lib/vlc/demux/cygmpc_plugin.dll
+  /usr/lib/vlc/demux/libmpc_plugin.la
+
+(vlc-plugin-ncurses)
+  /usr/lib/vlc/gui/cygncurses_plugin.dll
+  /usr/lib/vlc/gui/libncurses_plugin.la
+
+(vlc-plugin-notify)
+  /usr/lib/vlc/misc/cygnotify_plugin.dll
+  /usr/lib/vlc/misc/libnotify_plugin.la
+
+(vlc-plugin-ogg)
+  /usr/lib/vlc/demux/cygogg_plugin.dll
+  /usr/lib/vlc/demux/libogg_plugin.la
+  /usr/lib/vlc/mux/cygmux_ogg_plugin.dll
+  /usr/lib/vlc/mux/libmux_ogg_plugin.la
+
+(vlc-plugin-opengl)
+  /usr/lib/vlc/video_output/cygopengl_plugin.dll
+  /usr/lib/vlc/video_output/libopengl_plugin.la
+
+(vlc-plugin-png)
+  /usr/lib/vlc/codec/cygpng_plugin.dll
+  /usr/lib/vlc/codec/libpng_plugin.la
+
+(vlc-plugin-portaudio)
+  /usr/lib/vlc/audio_output/cygportaudio_plugin.dll
+  /usr/lib/vlc/audio_output/libportaudio_plugin.la
+
+(vlc-plugin-screen)
+  /usr/lib/vlc/access/cygscreen_plugin.dll
+  /usr/lib/vlc/access/libscreen_plugin.la
+
+(vlc-plugin-sdl)
+  /usr/lib/vlc/audio_output/cygaout_sdl_plugin.dll
+  /usr/lib/vlc/audio_output/libaout_sdl_plugin.la
+  /usr/lib/vlc/codec/cygsdl_image_plugin.dll
+  /usr/lib/vlc/codec/libsdl_image_plugin.la
+  /usr/lib/vlc/video_output/cygvout_sdl_plugin.dll
+  /usr/lib/vlc/video_output/libvout_sdl_plugin.la
+
+(vlc-plugin-shout)
+  /usr/lib/vlc/access_output/cygaccess_output_shout_plugin.dll
+  /usr/lib/vlc/access_output/libaccess_output_shout_plugin.la
+
+(vlc-plugin-skins2)
+  /usr/lib/vlc/gui/cygskins2_plugin.dll
+  /usr/lib/vlc/gui/libskins2_plugin.la
+
+(vlc-plugin-speex)
+  /usr/lib/vlc/codec/cygspeex_plugin.dll
+  /usr/lib/vlc/codec/libspeex_plugin.la
+
+(vlc-plugin-svg)
+  /usr/lib/vlc/misc/cygsvg_plugin.dll
+  /usr/lib/vlc/misc/libsvg_plugin.la
+
+(vlc-plugin-theora)
+  /usr/lib/vlc/codec/cygtheora_plugin.dll
+  /usr/lib/vlc/codec/libtheora_plugin.la
+
+(vlc-plugin-twolame)
+  /usr/lib/vlc/codec/cygtwolame_plugin.dll
+  /usr/lib/vlc/codec/libtwolame_plugin.la
+
+(vlc-plugin-vcdx)
+  /usr/lib/vlc/access/cygvcdx_plugin.dll
+  /usr/lib/vlc/access/libvcdx_plugin.la
+
+(vlc-plugin-vorbis)
+  /usr/lib/vlc/codec/cygvorbis_plugin.dll
+  /usr/lib/vlc/codec/libvorbis_plugin.la
+
+(vlc-plugin-wxwidgets)
+  /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
+  /usr/lib/vlc/gui/libwxwidgets_plugin.la
+
+(vlc-plugin-x11)
+  /usr/lib/vlc/video_output/cygx11_plugin.dll
+  /usr/lib/vlc/video_output/libx11_plugin.la
+
+(vlc-plugin-x264)
+  /usr/lib/vlc/codec/cygx264_plugin.dll
+  /usr/lib/vlc/codec/libx264_plugin.la
+
+(vlc-plugin-xml2)
+  /usr/lib/vlc/misc/cygxml_plugin.dll
+  /usr/lib/vlc/misc/libxml_plugin.la
+
+(vlc-plugin-xosd)
+  /usr/lib/vlc/visualization/cygxosd_plugin.dll
+  /usr/lib/vlc/visualization/libxosd_plugin.la
+
 (java-vlc)
   /usr/bin/cygjvlc.dll
   /usr/share/java/vlc.jar
@@ -800,8 +887,12 @@ Files included in the binary packages:
 
 Port Notes:
 
------ version 0.8.6g-2 -----
-Rebuilt for updated ffmpeg and x264.
+----- version 0.8.6h-1 -----
+Version bump.
+Plugins with external dependencies are now packaged separately.
+Updated ffmpeg and x264 dependencies.
+Added plugins: portaudio.
+Removed plugins: dirac (incompatible with 0.10 API), mozilla browser.
 
 ----- version 0.8.6g-1 -----
 Version bump.

@@ -1,7 +1,7 @@
-category: Audio Video
-requires: cygwin vlc gettext libiconv
+category: Video
+requires: cygwin vlc glib2 gdk-pixbuf2 librsvg2
 external-source: vlc
-sdesc: "VideoLAN multimedia player (development)"
+sdesc: "VideoLAN multimedia player (svg plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 
