@@ -7,7 +7,7 @@ as a server to stream in unicast or multicast in IPv4 or IPv6 on a
 high-bandwidth network.
 
 Runtime requirements:
-  cygwin-1.5.25-11
+  cygwin-1.5.25-15
   libiconv2-1.11-1
   libintl8-0.15-1
   zlib-1.2.3-2
@@ -15,25 +15,20 @@ Runtime requirements:
   classpath-0.93-1
   jamvm-1.4.5-1
 (python-vlc)
-  python-2.5.2-1
+  python-2.5.2-2
 (vlc-plugin-*)
+  arts-1.5.9-1
+  esound-0.2.38-1
   font-dejavu-ttf-2.24-1
-  gdk-pixbuf2-2.12.9-1
-  glib2-2.16.3-1
+  gdk-pixbuf2-2.12.11-1
+  glib2-2.16.4-1
   gnome-vfs2-2.22.0-1
-  gtk2-x11-2.12.9-1
-  libFLAC8-1.2.1-2
-  libGL1-7.0.3-1
-  libGLU1-7.0.3-1
-  libSDL12-1.2.13-1
-  libSDL_image-1.2.6-1
-  libX11_6-1.1.3-1
-  libXext6-1.0.3-1
+  gtk2-x11-2.12.11-1
   liba52_0-0.7.4-3
   libaa1-1.4rc5-1
-  libavcodec51-13270-1
-  libavformat52-13270-1
-  libavutil49-13270-1
+  libavcodec51-13777-1
+  libavformat52-13777-1
+  libavutil49-13777-1
   libcaca0-0.99.13-1
   libcddb2-1.3.0-1
   libcdio7-0.80-2
@@ -45,14 +40,17 @@ Runtime requirements:
   libdvdread3-0.9.7-1
   libebml0-0.7.7-1
   libfaad0-2.6.1-2
-  libfreetype26-2.3.5-1
+  libFLAC8-1.2.1-2
+  libfreetype26-2.3.7-1
   libfribidi0-0.10.9-1
   libgcrypt11-1.4.0-1
   libggi2-2.2.1-1
+  libGL1-7.0.3-1
+  libGLU1-7.0.3-1
   libgnutls26-2.2.2-1
   libgoom2_0-2004.0-1
   libid3tag0-0.15.1b-4
-  libmad-0.15.1b-3
+  libmad0-0.15.1b-4
   libmatroska0-0.8.1-1
   libmodplug0-0.8.4-2
   libmpcdec5-1.2.6-1
@@ -62,8 +60,10 @@ Runtime requirements:
   libogg0-1.1.3-1
   libpng12-1.2.29-1
   libportaudio2-19.20071207-1
-  libpostproc51-13270-1
+  libpostproc51-13777-1
   librsvg2-2.22.2-1
+  libSDL12-1.2.13-1
+  libSDL_image-1.2.6-1
   libshout3-2.2.2-1
   libspeex1-1.2beta2-1
   libtar0-1.2.11-1
@@ -72,18 +72,20 @@ Runtime requirements:
   libvcdinfo0-0.7.23-2
   libvorbis0-1.2.0-1
   libvorbisenc2-1.2.0-1
+  libX11_6-1.1.3-1
   libx264_59-20080521-1
+  libXext6-1.0.3-1
   libxml2-2.6.32-1
   libxosd2-2.2.14-1
-  wx26-base-2.6.4-3
-  wx26-gtk2-2.6.4-3
+  wx26-base-2.6.4.0-4
+  wx26-gtk2-2.6.4.0-4
 
 Build requirements:
 (besides corresponding -devel packages)
   autoconf2.5-2.61-1
   automake1.9-1.9.6-2
   binutils-20060817-1
-  cygport-0.3.11-1
+  cygport-0.3.12-1
   fastjar-0.94-1
   gawk-3.1.6-1
   gcc-core-3.4.4-3
@@ -93,7 +95,7 @@ Build requirements:
   jikes-1.4.5-1
   libtool-2.2.2-2
   make-3.81-1
-  pkg-config-0.21-1
+  pkg-config-0.23a-2
   sed-4.1.5-2
 
 Canonical website:
@@ -105,19 +107,19 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack vlc-0.8.6g-X-src.tar.bz2
+  unpack vlc-0.8.6i-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./vlc-0.8.6g-X.cygport all
+  cygport ./vlc-0.8.6i-X.cygport all
 
 This will create:
-  /usr/src/java-vlc-0.8.6g-X.tar.bz2
-  /usr/src/python-vlc-0.8.6g-X.tar.bz2
-  /usr/src/vlc-0.8.6g-X-src.tar.bz2
-  /usr/src/vlc-0.8.6g-X.tar.bz2
-  /usr/src/vlc-devel-0.8.6g-X.tar.bz2
-  /usr/src/vlc-plugin-*-0.8.6g-X.tar.bz2
+  /usr/src/java-vlc-0.8.6i-X.tar.bz2
+  /usr/src/python-vlc-0.8.6i-X.tar.bz2
+  /usr/src/vlc-0.8.6i-X-src.tar.bz2
+  /usr/src/vlc-0.8.6i-X.tar.bz2
+  /usr/src/vlc-devel-0.8.6i-X.tar.bz2
+  /usr/src/vlc-plugin-*-0.8.6i-X.tar.bz2
 
 -------------------------------------------
 
@@ -462,20 +464,24 @@ Files included in the binary packages:
   /usr/lib/vlc/visualization/cygvisual_plugin.dll
   /usr/lib/vlc/visualization/libvisual_plugin.la
   /usr/share/applications/vlc.desktop
-  /usr/share/doc/vlc-0.8.6h/ABOUT-NLS
-  /usr/share/doc/vlc-0.8.6h/AUTHORS
-  /usr/share/doc/vlc-0.8.6h/bugreport-howto.txt
-  /usr/share/doc/vlc-0.8.6h/ChangeLog
-  /usr/share/doc/vlc-0.8.6h/COPYING
-  /usr/share/doc/vlc-0.8.6h/fortunes.txt
-  /usr/share/doc/vlc-0.8.6h/HACKING
-  /usr/share/doc/vlc-0.8.6h/INSTALL
-  /usr/share/doc/vlc-0.8.6h/intf-cdda.txt
-  /usr/share/doc/vlc-0.8.6h/intf-vcd.txt
-  /usr/share/doc/vlc-0.8.6h/MAINTAINERS
-  /usr/share/doc/vlc-0.8.6h/NEWS
-  /usr/share/doc/vlc-0.8.6h/README
-  /usr/share/doc/vlc-0.8.6h/THANKS
+  /usr/share/doc/vlc-0.8.6i/ABOUT-NLS
+  /usr/share/doc/vlc-0.8.6i/AUTHORS
+  /usr/share/doc/vlc-0.8.6i/bugreport-howto.txt
+  /usr/share/doc/vlc-0.8.6i/ChangeLog
+  /usr/share/doc/vlc-0.8.6i/COPYING
+  /usr/share/doc/vlc-0.8.6i/fortunes.txt
+  /usr/share/doc/vlc-0.8.6i/HACKING
+  /usr/share/doc/vlc-0.8.6i/INSTALL
+  /usr/share/doc/vlc-0.8.6i/intf-cdda.txt
+  /usr/share/doc/vlc-0.8.6i/intf-vcd.txt
+  /usr/share/doc/vlc-0.8.6i/MAINTAINERS
+  /usr/share/doc/vlc-0.8.6i/NEWS
+  /usr/share/doc/vlc-0.8.6i/README
+  /usr/share/doc/vlc-0.8.6i/THANKS
+  /usr/share/icons/hicolor/128x128/apps/vlc.png
+  /usr/share/icons/hicolor/16x16/apps/vlc.png
+  /usr/share/icons/hicolor/32x32/apps/vlc.png
+  /usr/share/icons/hicolor/48x48/apps/vlc.png
   /usr/share/locale/af/LC_MESSAGES/vlc.mo
   /usr/share/locale/ar/LC_MESSAGES/vlc.mo
   /usr/share/locale/ca/LC_MESSAGES/vlc.mo
@@ -699,6 +705,10 @@ Files included in the binary packages:
   /usr/lib/vlc/video_output/cygaa_plugin.dll
   /usr/lib/vlc/video_output/libaa_plugin.la
 
+(vlc-plugin-arts)
+  /usr/lib/vlc/video_output/cygarts_plugin.dll
+  /usr/lib/vlc/video_output/libarts_plugin.la
+
 (vlc-plugin-caca)
   /usr/lib/vlc/video_output/cygcaca_plugin.dll
   /usr/lib/vlc/video_output/libcaca_plugin.la
@@ -724,6 +734,10 @@ Files included in the binary packages:
 (vlc-plugin-dvdread)
   /usr/lib/vlc/access/cygdvdread_plugin.dll
   /usr/lib/vlc/access/libdvdread_plugin.la
+
+(vlc-plugin-esd)
+  /usr/lib/vlc/video_output/cygesd_plugin.dll
+  /usr/lib/vlc/video_output/libesd_plugin.la
 
 (vlc-plugin-faad)
   /usr/lib/vlc/codec/cygfaad_plugin.dll
@@ -802,6 +816,10 @@ Files included in the binary packages:
 (vlc-plugin-opengl)
   /usr/lib/vlc/video_output/cygopengl_plugin.dll
   /usr/lib/vlc/video_output/libopengl_plugin.la
+
+(vlc-plugin-pda)
+  /usr/lib/vlc/codec/cygpda_plugin.dll
+  /usr/lib/vlc/codec/libpda_plugin.la
 
 (vlc-plugin-png)
   /usr/lib/vlc/codec/cygpng_plugin.dll
@@ -886,6 +904,10 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 0.8.6i-1 -----
+Version bump.
+Added plugins: arts, esd, pda.
 
 ----- version 0.8.6h-1 -----
 Version bump.

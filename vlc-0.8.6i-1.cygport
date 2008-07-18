@@ -1,0 +1,213 @@
+WX_VERSION=2.6
+WX_TOOLKIT=gtk2
+WX_CODESET=ansi
+inherit java python wxwidgets
+
+DESCRIPTION="VideoLAN multimedia client"
+HOMEPAGE="http://www.videolan.org/vlc/"
+SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
+PATCH_URI="
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/110_all_dtspic.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/180_all_faad.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/190_all_strict-aliasing.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/200_all_nonpermissive.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/250_all_livepic.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/290_all_altivec.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/330_all_libdca.patch
+"
+# for 0.9.1, but broken for current 0.10.0
+#	http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/~checkout~/SOURCES/vlc-dirac.patch
+
+PKG_NAMES="${PN} ${PN}-devel java-${PN} python-${PN}"
+PKG_HINTS="setup devel java python"
+PKG_CONTENTS[0]=
+PKG_CONTENTS[1]="usr/bin/vlc-config usr/include/ usr/lib/libvlc.*"
+PKG_CONTENTS[2]='usr/bin/cygjvlc.dll usr/share/java/'
+PKG_CONTENTS[3]="usr/bin/vlcwrapper.py ${PYTHON_SITELIB#/}"
+
+DIFF_EXCLUDES="private.m4*"
+
+n=4
+for m in \
+	a52 aa arts caca cddax dvbpsi dvdnav dvdread dts esd faad ffmpeg flac freetype \
+	ggi glx gnomevfs gnutls goom libmpeg2 mad mkv mod mpc ncurses notify \
+	ogg opengl pda png portaudio screen sdl shout skins2 speex svg theora twolame \
+	vcdx vorbis wxwidgets x11 x264 xml2 xosd
+do
+	PKG_NAMES+=" vlc-plugin-${m}"
+	PKG_HINTS+=" ${m}"
+	CYGCONF_ARGS+=" --enable-${m}"
+
+	case ${m} in
+		a52)		p_n=a52tofloat32 ;;
+		dts)		p_n=dtstofloat32 ;;
+		dvbpsi)		p_n="ts mux_ts" ;;
+		ffmpeg)		p_n="ffmpeg stream_out_switcher" ;;
+		flac)		p_n=flacdec ;;
+		gnomevfs)	p_n=access_gnomevfs ;;
+		mad)		p_n="mpgatofixed32 id3tag" ;;
+		ogg)		p_n="ogg mux_ogg" ;;
+		sdl)		p_n="aout_sdl sdl_image vout_sdl" ;;
+		shout)		p_n=access_output_shout ;;
+		xml2)		p_n=xml ;;
+		*)			p_n=${m} ;;
+	esac
+
+	for _p_n in ${p_n}
+	do
+		PKG_CONTENTS[0]+=" --exclude=cyg${_p_n}_plugin.dll --exclude=lib${_p_n}_plugin.la"
+		PKG_CONTENTS[${n}]+=" usr/lib/vlc/*/cyg${_p_n}_plugin.dll
+		                      usr/lib/vlc/*/lib${_p_n}_plugin.la"
+	done
+	let n++
+done
+unset m n p_n _p_n
+
+PKG_CONTENTS[0]+=" --exclude=java
+                   etc/ usr/bin/cygvlc-0.dll usr/bin/vlc.exe usr/bin/*vlc
+                   usr/lib/vlc/ usr/share/"
+
+# galaktos requires fmemopen and strverscmp
+# libtar just does not work, uses zlib instead
+CYGCONF_ARGS+="
+  --with-words=little
+  --disable-maintainer-mode
+  --enable-libtool
+  --disable-rpath
+  --enable-release
+  --enable-java-bindings
+  --enable-mediacontrol-python-bindings
+  JAVA_HOME=${JAVA_HOME}
+
+  --disable-activex
+  --disable-alsa
+  --disable-altivec
+  --disable-bonjour
+  --disable-cyberlink
+  --disable-daap
+  --disable-dc1394
+  --disable-dirac
+  --disable-directfb
+  --disable-directx
+  --disable-dshow
+  --disable-dv
+  --disable-dvb
+  --disable-fb
+  --disable-galaktos
+  --disable-glide
+  --disable-hal
+  --disable-jack
+  --disable-libtar
+  --disable-lirc
+  --disable-live555
+  --disable-loader
+  --disable-mga
+  --disable-mozilla
+  --disable-pvr
+  --disable-quicktime
+  --disable-smb
+  --disable-svgalib
+  --disable-tarkin
+  --disable-testsuite
+  --disable-tremor
+  --disable-upnp
+  --disable-v4l
+  --disable-wingdi
+  --disable-xinerama
+  --disable-xvideo
+
+  --enable-cdda
+  --enable-cmml
+  --enable-fribidi
+  --enable-growl
+  --enable-httpd
+  --enable-libcddb
+  --enable-libcdio
+  --enable-oss
+  --enable-real
+  --enable-realrtsp
+  --enable-snapshot
+  --enable-sout
+  --enable-vcd
+  --enable-visual
+  --enable-vlm
+  --enable-waveout
+
+  --with-dvbpsi=/usr
+  --with-ffmpeg-dts
+  --with-ffmpeg-faac
+  --with-ffmpeg-mp3lame
+  --with-ffmpeg-ogg
+  --with-ffmpeg-theora
+  --with-ffmpeg-vorbis
+  --with-ffmpeg-zlib
+"
+
+src_compile() {
+	cd ${S}
+	cygautoreconf
+
+	cd ${B}
+	cygconf # already defined CYGCONF_ARGS
+
+	# bindings are built and installed manually
+	sed -i -e '/^SUBDIRS =/ s/bindings//' ${B}/Makefile
+
+	# libstdc++ and libobjc are only static, libtool refuses to link shared
+	sed -e 's/ -lobjc/ -Wl,-lobjc,-lcygwin/' \
+		-e 's/ -lstdc++//g' \
+		-i ${B}/vlc-config
+
+	# libtool-2.2.2 bug: sometimes won't find w32api libs
+	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /lib/w32api"|' \
+		-i ${B}/libtool
+
+	cd ${B}
+
+	# FIXME: should these be added to wx-config --libs?
+	sed -i -e '/lwx/ s#"$# -lgtk-x11-2.0 -lgdk-x11-2.0"#' vlc-config
+
+	cygmake LDFLAGS='-no-undefined' LIBS='-lintl'
+
+	# Python bindings
+	cd ${B}/bindings/mediacontrol-python
+	cygmake
+
+	# Java bindings
+	cd ${B}/bindings/java
+
+	mkdir -p includes
+	${JAVAC} -d . -classpath ${S}/bindings/java ${S}/bindings/java/org/videolan/jvlc/*.java
+
+	for class in org/videolan/jvlc/*.class
+	do
+		classbase=${class%.class}
+		classname=${classbase##*/}
+		${JAVAH} -jni ${classbase} -o includes/${classname}.h
+	done
+
+	${JAR} cf vlc.jar org/videolan/jvlc/
+
+	cygmake \
+		JINCLUDES='-I/usr/include/classpath' \
+		LIBJINCLUDES='-L/usr/lib/classpath -ljawt -lX11'
+}
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	cd ${B}/bindings/mediacontrol-python
+	dobin scripts-${PYTHON_VERSION}/vlcwrapper.py
+	dopython lib.cygwin-*-${PYTHON_VERSION}/vlc.dll
+
+	cd ${B}/bindings/java
+	dobin cygjvlc.dll
+	dojar vlc.jar
+
+	for res in 16x16 32x32 48x48 128x128
+	do
+		insinto /usr/share/icons/hicolor/${res}/apps
+		newins ${S}/share/vlc${res}.png vlc.png
+	done
+}

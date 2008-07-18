@@ -1,7 +1,7 @@
 category: Audio Video Gnome
-requires: cygwin vlc gtk2-x11 wx26-base wx26-gtk2
+requires: cygwin vlc glib2 atk gdk-pixbuf2 gtk2-x11
 external-source: vlc
-sdesc: "VideoLAN multimedia player (wxWidgets GUI)"
+sdesc: "VideoLAN multimedia player (GTK+ compact GUI)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 
