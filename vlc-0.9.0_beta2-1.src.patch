@@ -1,0 +1,269 @@
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/configure.ac src/vlc-0.9.0-test2/configure.ac
+--- origsrc/vlc-0.9.0-test2/configure.ac	2008-07-17 19:36:17.953125000 -0500
++++ src/vlc-0.9.0-test2/configure.ac	2008-07-18 01:17:15.328125000 -0500
+@@ -417,7 +417,7 @@
+ dnl
+ dnl Gettext stuff
+ dnl
+-AM_GNU_GETTEXT_VERSION([0.17])
++AM_GNU_GETTEXT_VERSION([0.15])
+ AM_GNU_GETTEXT([external])
+ VLC_ADD_LIBS([libvlc vlc], [${LTLIBINTL}])
+ 
+@@ -704,7 +704,7 @@
+ 
+ # Win32 style
+ if test "${ac_cv_have_plugins}" = "no"; then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
++  if test "${SYS}" = "mingw32"; then
+     AC_CHECK_LIB(kernel32, main,
+      [VLC_ADD_LIBS([libvlc],[-lkernel32])
+       AC_DEFINE(HAVE_DL_WINDOWS, 1, [Define if you have Windows' LoadLibrary])
+@@ -881,7 +881,7 @@
+ AC_ARG_ENABLE(dbus,
+   [  --enable-dbus           Linux D-BUS message bus system (default enabled)])
+ case "${SYS}" in
+-    linux*|*bsd*)
++    linux*|*bsd*|*cygwin*)
+ if test "${enable_dbus}" != "no"
+ then
+   dnl api stable dbus
+@@ -2137,7 +2137,7 @@
+   [  --enable-dshow          Win32 DirectShow support (default enabled on Win32)])
+ if test "${enable_dshow}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+     AC_LANG_PUSH(C++)
+       AC_CHECK_HEADERS(dshow.h,
+@@ -2156,7 +2156,7 @@
+ 		  enabled on Win32)]))
+ if test "${enable_bda}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+       AC_CHECK_HEADERS(dshow.h,
+       [ VLC_ADD_PLUGIN([bda])
+@@ -2175,7 +2175,7 @@
+ then
+   AC_ARG_WITH(opencv-tree,
+   [    --with-opencv-tree=PATH opencv tree for linking])
+-    if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++    if test "${SYS}" = "mingw32"
+     then
+       test -z "${with_opencv_tree}" && AC_MSG_ERROR([You have to specify --with-opencv-tree])
+ 	  AC_MSG_CHECKING(for opencv in ${with_opencv_tree})
+@@ -4285,7 +4285,7 @@
+ dnl  Windows DirectX module
+ dnl
+ 
+-if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce" -o "${SYS}" = "cygwin"
++if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce"
+ then
+   VLC_ADD_PLUGIN([panoramix])
+ fi
+@@ -4294,7 +4294,7 @@
+   [  --enable-directx        Win32 DirectX support (default enabled on Win32)])
+ if test "${enable_directx}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce"
+   then
+     AC_ARG_WITH(directx,
+     [    --with-directx=PATH   Win32 DirectX headers])
+@@ -4502,7 +4502,7 @@
+ AC_ARG_ENABLE(wingdi,
+   [  --enable-wingdi         Win32 GDI module (default enabled on Win32)])
+ if test "${enable_wingdi}" != "no"; then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
++  if test "${SYS}" = "mingw32"; then
+     VLC_ADD_PLUGIN([wingdi])
+     VLC_ADD_LIBS([wingdi],[-lgdi32])
+   fi
+@@ -4811,7 +4811,7 @@
+     fi
+   fi
+ 
+-  if test "${skins2_missing_lib}" = "no" && (test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"); then
++  if test "${skins2_missing_lib}" = "no" && test "${SYS}" = "mingw32"; then
+     VLC_ADD_PLUGIN([skins2])
+     ALIASES="${ALIASES} svlc"
+     VLC_ADD_CPPFLAGS([skins2],[-U_OFF_T_ -U_off_t -Imodules/gui/skins2 -DWIN32_SKINS])
+@@ -4871,7 +4871,7 @@
+     VLC_ADD_PLUGIN([qt4])
+     AC_DEFINE([HAVE_QT4], 1, [Define to 1 if you have QT4 library.])
+     ALIASES="${ALIASES} qvlc"
+-    AS_IF([test "${SYS}" != "mingw32" -a "${SYS}" != "mingwce" -a "${SYS}" != "cygwin" -a "${SYS}" != "darwin"], [
++    AS_IF([test "${SYS}" != "mingw32" -a "${SYS}" != "mingwce" -a "${SYS}" != "darwin"], [
+         VLC_ADD_LIBS([qt4],[$QT4_LIBS -lX11])
+     ], [
+         VLC_ADD_LIBS([qt4],[$QT4_LIBS])
+@@ -5331,7 +5331,7 @@
+   [    --with-wine-sdk-path=PATH path to wine sdk])
+ if test "${enable_activex}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+     AC_CHECK_PROGS(MIDL, [midl], no)
+     if test "${with_wine_sdk_path}" != ""
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/doc/Makefile.am src/vlc-0.9.0-test2/doc/Makefile.am
+--- origsrc/vlc-0.9.0-test2/doc/Makefile.am	2008-06-27 10:01:18.000000000 -0500
++++ src/vlc-0.9.0-test2/doc/Makefile.am	2008-07-17 19:44:48.578125000 -0500
+@@ -1,7 +1,5 @@
+ NULL =
+ 
+-docdir = $(datadir)/doc/@PACKAGE@
+-
+ doc_DATA = \
+ 	bugreport-howto.txt \
+ 	fortunes.txt \
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/access/mmap.c src/vlc-0.9.0-test2/modules/access/mmap.c
+--- origsrc/vlc-0.9.0-test2/modules/access/mmap.c	2008-07-05 06:34:47.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/access/mmap.c	2008-07-17 23:19:43.968750000 -0500
+@@ -129,7 +129,7 @@
+             goto error;
+     }
+ 
+-    p_sys->page_size = sysconf (_SC_PAGE_SIZE);
++    p_sys->page_size = sysconf (_SC_PAGESIZE);
+     p_sys->mtu = MMAP_SIZE;
+     if (p_sys->mtu < p_sys->page_size)
+         p_sys->mtu = p_sys->page_size;
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/access/udp.c src/vlc-0.9.0-test2/modules/access/udp.c
+--- origsrc/vlc-0.9.0-test2/modules/access/udp.c	2008-07-05 06:34:48.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/access/udp.c	2008-07-17 23:20:57.078125000 -0500
+@@ -109,9 +109,11 @@
+                 fam = AF_INET;
+                 break;
+ 
++#ifdef AF_INET6
+             case '6':
+                 fam = AF_INET6;
+                 break;
++#endif
+         }
+     }
+ 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/codec/realaudio.c src/vlc-0.9.0-test2/modules/codec/realaudio.c
+--- origsrc/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-05 06:34:48.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-17 19:46:42.015625000 -0500
+@@ -491,6 +491,9 @@
+ 
+ static int OpenWin32Dll( decoder_t *p_dec, char *psz_path, char *psz_dll )
+ {
++#if defined(__CYGWIN__)
++    return OpenNativeDll ( p_dec, psz_path, psz_dll );
++#endif
+ #if defined(LOADER) || defined(WIN32)
+     decoder_sys_t *p_sys = p_dec->p_sys;
+     void *handle = 0, *context = 0;
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/gui/ncurses.c src/vlc-0.9.0-test2/modules/gui/ncurses.c
+--- origsrc/vlc-0.9.0-test2/modules/gui/ncurses.c	2008-07-05 06:34:50.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/gui/ncurses.c	2008-07-17 19:46:59.625000000 -0500
+@@ -124,7 +124,7 @@
+ vlc_module_begin();
+     set_shortname( "Ncurses" );
+     set_description( N_("Ncurses interface") );
+-    set_capability( "interface", 10 );
++    set_capability( "interface", 40 );
+     set_category( CAT_INTERFACE );
+     set_subcategory( SUBCAT_INTERFACE_MAIN );
+     set_callbacks( Open, Close );
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/misc/freetype.c src/vlc-0.9.0-test2/modules/misc/freetype.c
+--- origsrc/vlc-0.9.0-test2/modules/misc/freetype.c	2008-07-05 06:34:50.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/misc/freetype.c	2008-07-17 19:49:01.296875000 -0500
+@@ -60,6 +60,9 @@
+ #elif defined( WIN32 )
+ #define DEFAULT_FONT "" /* Default font found at run-time */
+ #define FC_DEFAULT_FONT "Arial"
++#elif defined( __CYGWIN__ )
++#define DEFAULT_FONT "/usr/share/fonts/TTF/DejaVuSerif-Bold.ttf"
++#define FC_DEFAULT_FONT "Serif Bold"
+ #else
+ #define DEFAULT_FONT "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf"
+ #define FC_DEFAULT_FONT "Serif Bold"
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/services_discovery/sap.c src/vlc-0.9.0-test2/modules/services_discovery/sap.c
+--- origsrc/vlc-0.9.0-test2/modules/services_discovery/sap.c	2008-07-11 15:12:52.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/services_discovery/sap.c	2008-07-17 23:53:54.140625000 -0500
+@@ -495,6 +495,7 @@
+         InitSocket( p_sd, SAP_V4_LOCAL_ADDRESS, SAP_PORT );
+         InitSocket( p_sd, SAP_V4_LINK_ADDRESS, SAP_PORT );
+     }
++#ifndef __CYGWIN__
+     if( var_CreateGetInteger( p_sd, "sap-ipv6" ) )
+     {
+         char psz_address[NI_MAXNUMERICHOST] = "ff02::2:7ffe%";
+@@ -544,6 +545,7 @@
+             InitSocket( p_sd, psz_address, SAP_PORT );
+         }
+     }
++#endif /* __CYGWIN__ */
+ 
+     psz_addr = var_CreateGetString( p_sd, "sap-addr" );
+     if( psz_addr && *psz_addr )
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/modules/stream_out/standard.c src/vlc-0.9.0-test2/modules/stream_out/standard.c
+--- origsrc/vlc-0.9.0-test2/modules/stream_out/standard.c	2008-07-05 06:34:51.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/stream_out/standard.c	2008-07-18 00:09:34.984375000 -0500
+@@ -386,6 +386,7 @@
+     }
+     msg_Dbg( p_stream, "mux opened" );
+ 
++#ifndef __CYGWIN__  /* getaddrinfo */
+     /* *** Create the SAP Session structure *** */
+     if( var_GetBool( p_stream, SOUT_CFG_PREFIX"sap" ) )
+     {
+@@ -446,6 +447,7 @@
+         }
+         free (dhost);
+     }
++#endif /* __CYGWIN__ */
+ 
+     p_stream->pf_add    = Add;
+     p_stream->pf_del    = Del;
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/src/misc/threads.c src/vlc-0.9.0-test2/src/misc/threads.c
+--- origsrc/vlc-0.9.0-test2/src/misc/threads.c	2008-07-11 16:01:53.000000000 -0500
++++ src/vlc-0.9.0-test2/src/misc/threads.c	2008-07-17 22:36:02.265625000 -0500
+@@ -104,7 +104,7 @@
+ 
+     /* Sometimes strerror_r() crashes too, so make sure we print an error
+      * message before we invoke it */
+-#ifdef __GLIBC__
++#if defined(__GLIBC__) || defined(__CYGWIN__)
+     /* Avoid the strerror_r() prototype brain damage in glibc */
+     errno = error;
+     fprintf (stderr, " Error message: %m at:\n");
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/src/network/udp.c src/vlc-0.9.0-test2/src/network/udp.c
+--- origsrc/vlc-0.9.0-test2/src/network/udp.c	2008-06-27 10:01:28.000000000 -0500
++++ src/vlc-0.9.0-test2/src/network/udp.c	2008-07-17 23:16:27.125000000 -0500
+@@ -94,6 +94,16 @@
+ # define UDPLITE_RECV_CSCOV     11
+ #endif
+ 
++/* http://www.cygwin.com/ml/cygwin/2007-01/msg00523.html */
++#ifdef __CYGWIN__
++# define if_nametoindex( str ) atoi( str )
++struct ip_mreq_source {
++	struct  in_addr imr_multiaddr;
++	struct  in_addr imr_sourceaddr;
++	struct  in_addr imr_interface;
++};
++#endif
++
+ extern int net_Socket( vlc_object_t *p_this, int i_family, int i_socktype,
+                        int i_protocol );
+ 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x m4 origsrc/vlc-0.9.0-test2/src/stream_output/sap.c src/vlc-0.9.0-test2/src/stream_output/sap.c
+--- origsrc/vlc-0.9.0-test2/src/stream_output/sap.c	2008-06-27 10:01:28.000000000 -0500
++++ src/vlc-0.9.0-test2/src/stream_output/sap.c	2008-07-17 19:57:47.937500000 -0500
+@@ -265,7 +265,7 @@
+ 
+     switch( p_session->addr.ss_family )
+     {
+-#if defined (HAVE_INET_PTON) || defined (WIN32)
++#if defined (AF_INET6) || defined (WIN32)
+         case AF_INET6:
+         {
+             /* See RFC3513 for list of valid IPv6 scopes */
