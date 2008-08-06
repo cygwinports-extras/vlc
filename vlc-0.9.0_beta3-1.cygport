@@ -4,7 +4,12 @@ my_pv=${PV/_beta/-test}
 SRC_URI="http://download.videolan.org/pub/videolan/testing/${PN}-${my_pv}/${PN}-${my_pv}.tar.bz2"
 SRC_DIR="${PN}-${my_pv}"
 PATCH_URI="
-	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV%_*}/250_all_livepic.patch
+	0.9.0-configure.patch
+	0.9.0-docdir.patch
+	0.9.0-freetype.patch
+	0.9.0-ipv6.patch
+	0.9.0-pagesize.patch
+	0.9.0-realaudio.patch
 "
 
 PKG_NAMES="${PN} lib${PN}-devel"
@@ -67,7 +72,7 @@ do
 	PKG_NAMES+=" vlc-gui-${gui}"
 	PKG_HINTS+=" ${gui}"
 	CYGCONF_ARGS+=" --enable-${gui}"
-	PKG_CONTENTS[0]+=" --exclude=${gui:0:1}vlc 
+	PKG_CONTENTS[0]+=" --exclude=${gui:0:1}vlc
 	                   --exclude=cyg${gui}_plugin.dll
 	                   --exclude=lib${gui}_plugin.la"
 	PKG_CONTENTS[${n}]=" usr/bin/${gui:0:1}vlc

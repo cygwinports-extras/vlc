@@ -1,0 +1,110 @@
+--- origsrc/vlc-0.9.0-test3/configure.ac	2008-07-17 19:36:17.953125000 -0500
++++ src/vlc-0.9.0-test3/configure.ac	2008-07-18 01:17:15.328125000 -0500
+@@ -411,7 +411,7 @@
+ dnl
+ dnl Gettext stuff
+ dnl
+-AM_GNU_GETTEXT_VERSION([0.17])
++AM_GNU_GETTEXT_VERSION([0.15])
+ AM_GNU_GETTEXT([external])
+ VLC_ADD_LIBS([libvlc vlc], [${LTLIBINTL}])
+ 
+@@ -698,7 +698,7 @@
+ 
+ # Win32 style
+ if test "${ac_cv_have_plugins}" = "no"; then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
++  if test "${SYS}" = "mingw32"; then
+     AC_CHECK_LIB(kernel32, main,
+      [VLC_ADD_LIBS([libvlc],[-lkernel32])
+       AC_DEFINE(HAVE_DL_WINDOWS, 1, [Define if you have Windows' LoadLibrary])
+@@ -877,7 +877,7 @@
+ AC_ARG_ENABLE(dbus,
+   [  --enable-dbus           Linux D-BUS message bus system (default enabled)])
+ case "${SYS}" in
+-    linux*|*bsd*)
++    linux*|*bsd*|*cygwin*)
+ if test "${enable_dbus}" != "no"
+ then
+   dnl api stable dbus
+@@ -2161,7 +2161,7 @@
+   [  --enable-dshow          Win32 DirectShow support (default enabled on Win32)])
+ if test "${enable_dshow}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+     AC_LANG_PUSH(C++)
+       AC_CHECK_HEADERS(dshow.h,
+@@ -2180,7 +2180,7 @@
+ 		  enabled on Win32)]))
+ if test "${enable_bda}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+       AC_CHECK_HEADERS(dshow.h,
+       [ VLC_ADD_PLUGIN([bda])
+@@ -2199,7 +2199,7 @@
+ then
+   AC_ARG_WITH(opencv-tree,
+   [    --with-opencv-tree=PATH opencv tree for linking])
+-    if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++    if test "${SYS}" = "mingw32"
+     then
+       test -z "${with_opencv_tree}" && AC_MSG_ERROR([You have to specify --with-opencv-tree])
+ 	  AC_MSG_CHECKING(for opencv in ${with_opencv_tree})
+@@ -4277,7 +4277,7 @@
+ dnl  Windows DirectX module
+ dnl
+ 
+-if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce" -o "${SYS}" = "cygwin"
++if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce"
+ then
+   VLC_ADD_PLUGIN([panoramix])
+ fi
+@@ -4286,7 +4286,7 @@
+   [  --enable-directx        Win32 DirectX support (default enabled on Win32)])
+ if test "${enable_directx}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32" -o "${SYS}" = "mingwce"
+   then
+     AC_ARG_WITH(directx,
+     [    --with-directx=PATH   Win32 DirectX headers])
+@@ -4494,7 +4494,7 @@
+ AC_ARG_ENABLE(wingdi,
+   [  --enable-wingdi         Win32 GDI module (default enabled on Win32)])
+ if test "${enable_wingdi}" != "no"; then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
++  if test "${SYS}" = "mingw32"; then
+     VLC_ADD_PLUGIN([wingdi])
+     VLC_ADD_LIBS([wingdi],[-lgdi32])
+   fi
+@@ -4803,7 +4803,7 @@
+     fi
+   fi
+ 
+-  if test "${skins2_missing_lib}" = "no" && (test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"); then
++  if test "${skins2_missing_lib}" = "no" && test "${SYS}" = "mingw32"; then
+     VLC_ADD_PLUGIN([skins2])
+     ALIASES="${ALIASES} svlc"
+     VLC_ADD_CPPFLAGS([skins2],[-U_OFF_T_ -U_off_t -Imodules/gui/skins2 -DWIN32_SKINS])
+@@ -4863,7 +4863,7 @@
+     VLC_ADD_PLUGIN([qt4])
+     AC_DEFINE([HAVE_QT4], 1, [Define to 1 if you have QT4 library.])
+     ALIASES="${ALIASES} qvlc"
+-    AS_IF([test "${SYS}" != "mingw32" -a "${SYS}" != "mingwce" -a "${SYS}" != "cygwin" -a "${SYS}" != "darwin"], [
++    AS_IF([test "${SYS}" != "mingw32" -a "${SYS}" != "mingwce" -a "${SYS}" != "darwin"], [
+         VLC_ADD_LIBS([qt4],[$QT4_LIBS -lX11])
+     ], [
+         VLC_ADD_LIBS([qt4],[$QT4_LIBS])
+@@ -5326,7 +5326,7 @@
+   [    --with-wine-sdk-path=PATH path to wine sdk])
+ if test "${enable_activex}" != "no"
+ then
+-  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"
++  if test "${SYS}" = "mingw32"
+   then
+     AC_CHECK_PROGS(MIDL, [midl], no)
+     if test "${with_wine_sdk_path}" != ""
