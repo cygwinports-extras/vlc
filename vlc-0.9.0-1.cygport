@@ -1,8 +1,6 @@
 DESCRIPTION="VideoLAN multimedia client"
 HOMEPAGE="http://www.videolan.org/vlc/"
-my_pv=${PV/_beta/-test}
-SRC_URI="http://download.videolan.org/pub/videolan/testing/${PN}-${my_pv}/${PN}-${my_pv}.tar.bz2"
-SRC_DIR="${PN}-${my_pv}"
+SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
 PATCH_URI="
 	0.9.0-configure.patch
 	0.9.0-docdir.patch
@@ -25,7 +23,7 @@ for m in \
 	a52 aa arts asademux avcodec avformat caca cddax \
 	dca dirac dvbpsi dvdnav dvdread esd faad flac fluidsynth freetype \
 	ggi glx gnomevfs gnutls goom id3tag kate \
-	libmpeg2 libxml2 lua mad mkv mod mpc musicbrainz \
+	libass libmpeg2 libxml2 lua mad mkv mod mpc musicbrainz \
 	notify ogg opengl png portaudio postproc \
 	schroedinger screen sdl shout speex svg swscale \
 	taglib theora twolame vcdx vorbis x11 x264 xosd
