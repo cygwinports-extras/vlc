@@ -1,0 +1,11 @@
+--- origsrc/vlc-0.8.6i/modules/misc/freetype.c	2008-07-08 15:59:24.000000000 -0500
++++ src/vlc-0.8.6i/modules/misc/freetype.c	2008-07-17 15:21:06.468750000 -0500
+@@ -55,7 +55,7 @@
+ #elif defined( WIN32 )
+ #define DEFAULT_FONT "" /* Default font found at run-time */
+ #else
+-#define DEFAULT_FONT "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf"
++#define DEFAULT_FONT "/usr/share/fonts/TTF/DejaVuSerif-Bold.ttf"
+ #endif
+ 
+ #if defined(HAVE_FRIBIDI)

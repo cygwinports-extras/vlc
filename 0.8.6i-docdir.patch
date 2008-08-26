@@ -1,0 +1,10 @@
+--- origsrc/vlc-0.8.6i/doc/Makefile.am	2008-07-08 15:59:22.000000000 -0500
++++ src/vlc-0.8.6i/doc/Makefile.am	2008-07-17 15:21:06.421875000 -0500
+@@ -1,7 +1,5 @@
+ NULL =
+ 
+-docdir = $(datadir)/doc/@PACKAGE@
+-
+ doc_DATA = \
+ 	bugreport-howto.txt \
+ 	fortunes.txt \

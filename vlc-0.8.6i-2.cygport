@@ -14,6 +14,21 @@ PATCH_URI="
 	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/250_all_livepic.patch
 	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/290_all_altivec.patch
 	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/330_all_libdca.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/340_all_TTA-potential-0-divider.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/350_all_Check-malloc-return-value-and-fix-a-memory-leak.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/360_all_Use-VLC_ENOMEM-instead-of-VLC_EGENERIC.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/370_all_TTA-robustify-and-avoid-one-memcpy-allocation.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/380_all_TTA-Sanity-check-to-avoid-overflow-and-typo.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/390_all_Kill-a-warning-and-put-i_datalength-as-an-uint32_t.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/400_all_Fix-previous-commits.patch
+	http://sources.gentoo.org/viewcvs.py/*checkout*/gentoo/src/patchsets/${PN}/${PV}/410_all_MMS-integers-handling-fixes-including-buffer-overfl.patch
+	0.8.6i-bindings.patch
+	0.8.6i-configure.patch
+	0.8.6i-docdir.patch
+	0.8.6i-freetype.patch
+	0.8.6i-ipv6.patch
+	0.8.6i-realaudio.patch
+	0.8.6i-wxwidgets.patch
 "
 # for 0.9.1, but broken for current 0.10.0
 #	http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/~checkout~/SOURCES/vlc-dirac.patch
@@ -30,9 +45,9 @@ DIFF_EXCLUDES="private.m4*"
 n=4
 for m in \
 	a52 aa arts caca cddax dvbpsi dvdnav dvdread dts esd faad ffmpeg flac freetype \
-	ggi glx gnomevfs gnutls goom libmpeg2 mad mkv mod mpc ncurses notify \
-	ogg opengl pda png portaudio screen sdl shout skins2 speex svg theora twolame \
-	vcdx vorbis wxwidgets x11 x264 xml2 xosd
+	ggi glx gnomevfs gnutls goom libmpeg2 mad mkv mod mpc notify \
+	ogg opengl png portaudio screen sdl shout speex svg theora twolame \
+	vcdx vorbis x11 x264 xml2 xosd
 do
 	PKG_NAMES+=" vlc-plugin-${m}"
 	PKG_HINTS+=" ${m}"
@@ -61,7 +76,35 @@ do
 	done
 	let n++
 done
-unset m n p_n _p_n
+
+# GUI modules
+for gui in ncurses skins2 wxwidgets
+do
+	case ${gui} in
+		wxwidgets)	gui_cmd=wxvlc ;;
+		*)			gui_cmd=${gui:0:1}vlc ;;
+	esac
+
+	PKG_NAMES+=" vlc-gui-${gui}"
+	PKG_HINTS+=" ${gui}"
+	CYGCONF_ARGS+=" --enable-${gui}"
+	PKG_CONTENTS[0]+=" --exclude=${gui_cmd}
+	                   --exclude=cyg${gui}_plugin.dll
+	                   --exclude=lib${gui}_plugin.la"
+	PKG_CONTENTS[${n}]=" usr/bin/${gui_cmd}
+	                     usr/lib/vlc/gui/cyg${gui}_plugin.dll
+	                     usr/lib/vlc/gui/lib${gui}_plugin.la"
+
+	case ${gui} in
+	skins2)
+		PKG_CONTENTS[0]+=" --exclude=${gui}"
+		PKG_CONTENTS[${n}]+=" usr/share/vlc/${gui}/"
+		;;
+	esac
+
+	let n++
+done
+unset gui gui_cmd m n p_n _p_n
 
 PKG_CONTENTS[0]+=" --exclude=java
                    etc/ usr/bin/cygvlc-0.dll usr/bin/vlc.exe usr/bin/*vlc
@@ -159,7 +202,7 @@ src_compile() {
 		-i ${B}/vlc-config
 
 	# libtool-2.2.2 bug: sometimes won't find w32api libs
-	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /lib/w32api"|' \
+	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /usr/lib/w32api"|' \
 		-i ${B}/libtool
 
 	cd ${B}
@@ -204,6 +247,22 @@ src_install() {
 	cd ${B}/bindings/java
 	dobin cygjvlc.dll
 	dojar vlc.jar
+
+	for gui in dummy ncurses rc skins2 wxwidgets
+	do
+		case ${gui} in
+			dummy)		gui_cmd=cvlc ;;
+			wxwidgets)	gui_cmd=wxvlc ;;
+			*)			gui_cmd=${gui:0:1}vlc ;;
+		esac
+
+		rm -f ${D}/usr/bin/${gui_cmd}
+		cat > ${T}/${gui_cmd} <<-_EOF
+			#! /bin/sh
+			exec /usr/bin/vlc -I ${gui} "\$@"
+			_EOF
+		dobin ${T}/${gui_cmd}
+	done
 
 	for res in 16x16 32x32 48x48 128x128
 	do

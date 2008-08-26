@@ -119,6 +119,7 @@ This will create:
   /usr/src/vlc-0.8.6i-X-src.tar.bz2
   /usr/src/vlc-0.8.6i-X.tar.bz2
   /usr/src/vlc-devel-0.8.6i-X.tar.bz2
+  /usr/src/vlc-gui-*-0.8.6i-X.tar.bz2
   /usr/src/vlc-plugin-*-0.8.6i-X.tar.bz2
 
 -------------------------------------------
@@ -128,9 +129,9 @@ Files included in the binary packages:
 (vlc)
   /etc/postinstall/vlc.sh
   /usr/bin/cygvlc-0.dll
+  /usr/bin/cvlc
+  /usr/bin/rvlc
   /usr/bin/vlc.exe
-  /usr/bin/svlc
-  /usr/bin/wxvlc
   /usr/lib/vlc/access/cygaccess_directory_plugin.dll
   /usr/lib/vlc/access/cygaccess_fake_plugin.dll
   /usr/lib/vlc/access/cygaccess_file_plugin.dll
@@ -668,12 +669,6 @@ Files included in the binary packages:
   /usr/share/vlc/pda-preferencesb16x16.xpm
   /usr/share/vlc/pda-rewindb16x16.xpm
   /usr/share/vlc/pda-stopb16x16.xpm
-  /usr/share/vlc/skins2/default.vlt
-  /usr/share/vlc/skins2/fonts/FreeSans.ttf
-  /usr/share/vlc/skins2/fonts/FreeSansBold.ttf
-  /usr/share/vlc/skins2/skin.catalog
-  /usr/share/vlc/skins2/skin.dtd
-  /usr/share/vlc/skins2/winamp2.xml
   /usr/share/vlc/vlc128x128.png
   /usr/share/vlc/vlc16x16.png
   /usr/share/vlc/vlc16x16.xpm
@@ -696,6 +691,27 @@ Files included in the binary packages:
   /usr/include/vlc/vout.h
   /usr/lib/libvlc.dll.a
   /usr/lib/libvlc.la
+
+(vlc-gui-ncurses)
+  /usr/bin/nvlc
+  /usr/lib/vlc/gui/cygncurses_plugin.dll
+  /usr/lib/vlc/gui/libncurses_plugin.la
+
+(vlc-gui-skins2)
+  /usr/bin/svlc
+  /usr/lib/vlc/gui/cygskins2_plugin.dll
+  /usr/lib/vlc/gui/libskins2_plugin.la
+  /usr/share/vlc/skins2/default.vlt
+  /usr/share/vlc/skins2/fonts/FreeSans.ttf
+  /usr/share/vlc/skins2/fonts/FreeSansBold.ttf
+  /usr/share/vlc/skins2/skin.catalog
+  /usr/share/vlc/skins2/skin.dtd
+  /usr/share/vlc/skins2/winamp2.xml
+
+(vlc-gui-wxwidgets)
+  /usr/bin/wxvlc
+  /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
+  /usr/lib/vlc/gui/libwxwidgets_plugin.la
 
 (vlc-plugin-a52)
   /usr/lib/vlc/audio_filter/cyga52tofloat32_plugin.dll
@@ -799,10 +815,6 @@ Files included in the binary packages:
   /usr/lib/vlc/demux/cygmpc_plugin.dll
   /usr/lib/vlc/demux/libmpc_plugin.la
 
-(vlc-plugin-ncurses)
-  /usr/lib/vlc/gui/cygncurses_plugin.dll
-  /usr/lib/vlc/gui/libncurses_plugin.la
-
 (vlc-plugin-notify)
   /usr/lib/vlc/misc/cygnotify_plugin.dll
   /usr/lib/vlc/misc/libnotify_plugin.la
@@ -816,10 +828,6 @@ Files included in the binary packages:
 (vlc-plugin-opengl)
   /usr/lib/vlc/video_output/cygopengl_plugin.dll
   /usr/lib/vlc/video_output/libopengl_plugin.la
-
-(vlc-plugin-pda)
-  /usr/lib/vlc/codec/cygpda_plugin.dll
-  /usr/lib/vlc/codec/libpda_plugin.la
 
 (vlc-plugin-png)
   /usr/lib/vlc/codec/cygpng_plugin.dll
@@ -845,10 +853,6 @@ Files included in the binary packages:
   /usr/lib/vlc/access_output/cygaccess_output_shout_plugin.dll
   /usr/lib/vlc/access_output/libaccess_output_shout_plugin.la
 
-(vlc-plugin-skins2)
-  /usr/lib/vlc/gui/cygskins2_plugin.dll
-  /usr/lib/vlc/gui/libskins2_plugin.la
-
 (vlc-plugin-speex)
   /usr/lib/vlc/codec/cygspeex_plugin.dll
   /usr/lib/vlc/codec/libspeex_plugin.la
@@ -872,10 +876,6 @@ Files included in the binary packages:
 (vlc-plugin-vorbis)
   /usr/lib/vlc/codec/cygvorbis_plugin.dll
   /usr/lib/vlc/codec/libvorbis_plugin.la
-
-(vlc-plugin-wxwidgets)
-  /usr/lib/vlc/gui/cygwxwidgets_plugin.dll
-  /usr/lib/vlc/gui/libwxwidgets_plugin.la
 
 (vlc-plugin-x11)
   /usr/lib/vlc/video_output/cygx11_plugin.dll
@@ -904,6 +904,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 0.8.6i-2 -----
+Upstream patches for tta and mms plugins.
 
 ----- version 0.8.6i-1 -----
 Version bump.

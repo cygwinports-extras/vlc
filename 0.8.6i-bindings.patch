@@ -1,0 +1,86 @@
+--- origsrc/vlc-0.8.6i/bindings/java/Makefile.am	2008-07-08 15:59:22.000000000 -0500
++++ src/vlc-0.8.6i/bindings/java/Makefile.am	2008-07-17 15:21:06.343750000 -0500
+@@ -53,8 +53,12 @@
+ LIBJINCLUDES = -L$(JAVA_HOME)/jre/lib/$(PROCESSOR_FAMILY) -ljawt
+ JCH = gcjh -jni
+ JAVACXXFLAGS = `top_builddir=../.. ../../vlc-config --cflags pic` -I../../ -I ../../include $(JINCLUDES)
++if USE_LIBTOOL
++JAVALDFLAGS = -L../../src/.libs -lvlc `top_builddir=../.. ../../vlc-config --libs vlc pic`
++else
+ JAVALDFLAGS = -L../../src -lvlc `top_builddir=../.. ../../vlc-config --libs builtin vlc pic`
+ endif
++endif
+ 
+ export JINCLUDES
+ 
+@@ -68,14 +72,14 @@
+ else
+ libjvlc.so: $(OBJECTS) 	
+ 	$(MAKE) -C src
+-	$(CXX) -shared $(COBJECTS) $(LIBJINCLUDES) $(LDFLAGS) $(JAVALDFLAGS) -o libjvlc.so
++	$(CXX) -shared $(COBJECTS) $(LIBJINCLUDES) $(LDFLAGS) $(JAVALDFLAGS) -o cygjvlc.dll
+ endif
+ 
+ VlcClient: $(OBJECTS)
+-	$(JAVAC) VlcClient.java
++	$(JAVAC) -d . $(srcdir)/VlcClient.java
+ 
+ VLCExample: $(OBJECTS)
+-	$(JAVAC) VLCExample.java
++	$(JAVAC) -d . $(srcdir)/VLCExample.java
+ 
+ if HAVE_WIN32
+ %.class: %.java 
+@@ -83,7 +87,7 @@
+ 	$(JCH) org.videolan.jvlc.$(*F)
+ else
+ %.class: %.java
+-	$(JAVAC) $?
++	$(JAVAC) -d . -classpath $(srcdir) $?
+ 	$(JCH) $(@D)/$(*F) -o includes/$(*F).h
+ endif
+ 
+--- origsrc/vlc-0.8.6i/bindings/java/src/Makefile.am	2008-07-08 15:59:22.000000000 -0500
++++ src/vlc-0.8.6i/bindings/java/src/Makefile.am	2008-07-17 15:21:06.359375000 -0500
+@@ -13,7 +13,7 @@
+ 
+ if BUILD_JAVA
+ 
+-JAVACXXFLAGS = -I. -Isrc -I../../ -I ../../include -I../../../include  $(JINCLUDES) `top_builddir=../../.. ../../../vlc-config --cflags pic` -c
++JAVACXXFLAGS = -I. -Isrc -I../../ -I ../../include -I$(top_srcdir)/include  $(JINCLUDES) `top_builddir=../../.. ../../../vlc-config --cflags pic` -c
+ 
+ 
+ all: $(COBJECTS)
+--- origsrc/vlc-0.8.6i/bindings/mediacontrol-python/Makefile.am	2008-07-08 15:59:22.000000000 -0500
++++ src/vlc-0.8.6i/bindings/mediacontrol-python/Makefile.am	2008-07-17 15:21:06.375000000 -0500
+@@ -17,8 +17,8 @@
+ 
+ # FIXME: python setup.py install does not have any option to install from a different build directory
+ # so this will not work in a separate builddir
+-install:
+-	python $(srcdir)/setup.py install
++#install:
++#	python $(srcdir)/setup.py install
+ 
+ clean:
+ 	$(RM) -rf build
+--- origsrc/vlc-0.8.6i/bindings/mediacontrol-python/setup.py	2008-07-08 15:59:22.000000000 -0500
++++ src/vlc-0.8.6i/bindings/mediacontrol-python/setup.py	2008-07-17 15:21:06.390625000 -0500
+@@ -25,7 +25,7 @@
+     # Do not use PIC version on win32 and Mac OS X
+ if True:
+     # PIC version seems to be disabled on all platforms
+-    vlclib=os.path.join( top_builddir, 'src', 'libvlc.a' )
++    vlclib=os.path.join( top_builddir, 'src', '.libs', 'libvlc.dll.a' )
+     picflag=''
+ else:
+     vlclib=os.path.join( top_builddir, 'src', 'libvlc_pic.a' )
+@@ -69,7 +69,7 @@
+ 	ldflags = []
+ 	if os.sys.platform == 'darwin':
+ 	    ldflags = "-read_only_relocs warning".split()
+-        ldflags.extend(os.popen('%s --libs vlc %s builtin' % (vlcconfig,
++	ldflags.extend(os.popen('%s --libs vlc %s' % (vlcconfig,
+ 							      picflag), 
+ 				'r').readline().rstrip().split())
+ 	if os.sys.platform == 'darwin':
