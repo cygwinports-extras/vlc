@@ -42,6 +42,7 @@ do
 		ogg)		p_n="ogg mux_ogg" ;;
 		sdl)		p_n="aout_sdl sdl_image vout_sdl" ;;
 		shout)		p_n=access_output_shout ;;
+		x11)		p_n="x11 panoramix" ;;
 		*)			p_n=${m} ;;
 	esac
 
