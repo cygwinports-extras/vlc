@@ -23,7 +23,7 @@ for m in \
 	a52 aa arts asademux avcodec avformat caca cddax \
 	dca dirac dvbpsi dvdnav dvdread esd faad flac fluidsynth freetype \
 	ggi glx gnomevfs gnutls goom id3tag kate \
-	libass libmpeg2 libxml2 lua mad mkv mod mpc musicbrainz \
+	libass libmpeg2 libxml2 lua mad mkv mod mpc \
 	notify ogg opengl png portaudio postproc \
 	schroedinger screen sdl shout speex svg swscale \
 	taglib theora twolame vcdx vorbis x11 x264 xosd
@@ -132,6 +132,7 @@ CYGCONF_ARGS+="
   --disable-mozilla
   --disable-opencv
   --disable-opie
+  --disable-pda
   --disable-pulse
   --disable-pvr
   --disable-qte

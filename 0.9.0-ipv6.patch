@@ -12,17 +12,6 @@
          }
      }
  
---- origsrc/vlc-0.9.0-test2/modules/gui/ncurses.c	2008-07-05 06:34:50.000000000 -0500
-+++ src/vlc-0.9.0-test2/modules/gui/ncurses.c	2008-07-17 19:46:59.625000000 -0500
-@@ -124,7 +124,7 @@
- vlc_module_begin();
-     set_shortname( "Ncurses" );
-     set_description( N_("Ncurses interface") );
--    set_capability( "interface", 10 );
-+    set_capability( "interface", 40 );
-     set_category( CAT_INTERFACE );
-     set_subcategory( SUBCAT_INTERFACE_MAIN );
-     set_callbacks( Open, Close );
 --- origsrc/vlc-0.9.0-test2/modules/services_discovery/sap.c	2008-07-11 15:12:52.000000000 -0500
 +++ src/vlc-0.9.0-test2/modules/services_discovery/sap.c	2008-07-17 23:53:54.140625000 -0500
 @@ -495,6 +495,7 @@

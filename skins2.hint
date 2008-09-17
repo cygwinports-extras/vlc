@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libX11_6 libXext6 libfreetype26 libfribidi0 libtar0 zlib vlc-plugin-wxwidgets
+requires: cygwin vlc libX11_6 libXext6 libfreetype26 libfribidi0 zlib vlc-plugin-qt4
 external-source: vlc
 sdesc: "VideoLAN multimedia player (skins2 GUI)"
 ldesc: "VLC media player is a highly portable multimedia player for 

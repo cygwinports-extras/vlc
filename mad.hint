@@ -1,5 +1,5 @@
 category: Audio
-requires: cygwin vlc libid3tag0 libmad
+requires: cygwin vlc libmad0 vlc-plugin-id3tag
 external-source: vlc
 sdesc: "VideoLAN multimedia player (mad plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
