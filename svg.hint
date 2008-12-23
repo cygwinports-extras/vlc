@@ -1,5 +1,5 @@
 category: Video
-requires: cygwin vlc glib2 gdk-pixbuf2 librsvg2
+requires: cygwin vlc libglib2.0_0 libgdk_pixbuf2.0_0 librsvg2_2
 external-source: vlc
 sdesc: "VideoLAN multimedia player (svg plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

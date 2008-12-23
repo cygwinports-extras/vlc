@@ -191,8 +191,8 @@ src_compile() {
 		-i ${B}/vlc-config
 
 	# libtool-2.2.2 bug: sometimes won't find w32api libs
-	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /usr/lib/w32api"|' \
-		-i ${B}/libtool
+#	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /usr/lib/w32api"|' \
+#		-i ${B}/libtool
 
 	cygmake
 }
