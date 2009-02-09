@@ -21,10 +21,11 @@ Runtime requirements:
   libQtGui4-4.4.2-1
   libX11_6-1.1.5-1
 (vlc-gui-skins2)
-  libfreetype26-2.3.7-1
+  libfreetype6-2.3.8-1
   libfribidi0-0.10.9-1
-  libX11_6-1.1.5-1
+  libX11_6-1.1.5-2
   libXext6-1.0.4-1
+  libXinerama1-1.0.3-1
   zlib-1.2.3-2
 
 (vlc-plugin-*)
@@ -1217,6 +1218,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 0.9.8a-2 -----
+Enabled Xinerama support.
 
 ----- version 0.9.8a-1 -----
 Version bump.
