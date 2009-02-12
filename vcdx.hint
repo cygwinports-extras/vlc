@@ -1,5 +1,5 @@
 category: Video
-requires: cygwin vlc libcdio7 libvcdinfo0
+requires: cygwin vlc libcdio10 libvcdinfo0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (vcdx plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
