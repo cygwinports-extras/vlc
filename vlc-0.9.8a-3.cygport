@@ -8,6 +8,7 @@ PATCH_URI="
 	0.9.0-pagesize.patch
 	0.9.0-realaudio.patch
 	0.9.8a-xinerama-without-xv.patch
+	0.9.8a-libx264_66.patch
 "
 
 PKG_NAMES="${PN} lib${PN}-devel"
@@ -189,10 +190,6 @@ src_compile() {
 		-e 's| -lstdc++||g' \
 		-e 's|/usr/lib/qt4/share/qt4|/usr/share/qt4|' \
 		-i ${B}/vlc-config
-
-	# libtool-2.2.2 bug: sometimes won't find w32api libs
-#	sed -e 's|^\(sys_lib_search_path_spec=\).*|\1"/usr/lib /usr/lib/w32api"|' \
-#		-i ${B}/libtool
 
 	cygmake
 }
