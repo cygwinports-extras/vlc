@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libdbus1-devel libgetaddrinfo-devel gettext libiconv
+requires: vlc libdbus1-devel libgetaddrinfo-devel gettext libiconv
 external-source: vlc
 sdesc: "VideoLAN multimedia player (development)"
 ldesc: "VLC media player is a highly portable multimedia player for 

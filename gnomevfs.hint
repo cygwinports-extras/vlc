@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libglib2.0_0 libgnomevfs2_0
+requires: vlc libglib2.0_0 libgnomevfs2_0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (gnomevfs plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

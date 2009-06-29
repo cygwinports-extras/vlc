@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libkate1
+requires: vlc libkate1
 external-source: vlc
 sdesc: "VideoLAN multimedia player (kate plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

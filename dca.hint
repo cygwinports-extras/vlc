@@ -1,5 +1,5 @@
 category: Audio
-requires: cygwin vlc libdca0
+requires: vlc libdca0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (dca plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

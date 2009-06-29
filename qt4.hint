@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libQtCore4 libQtGui4 libX11_6
+requires: vlc libQtCore4 libQtGui4 libX11_6
 external-source: vlc
 sdesc: "VideoLAN multimedia player (Qt4 GUI)"
 ldesc: "VLC media player is a highly portable multimedia player for 

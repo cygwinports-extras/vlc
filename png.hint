@@ -1,5 +1,5 @@
 category: Video
-requires: cygwin vlc libpng12
+requires: vlc libpng12
 external-source: vlc
 sdesc: "VideoLAN multimedia player (png plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

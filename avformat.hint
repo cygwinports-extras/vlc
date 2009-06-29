@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libavformat52 libavutil49
+requires: vlc libavformat52 libavutil49
 external-source: vlc
 sdesc: "VideoLAN multimedia player (avformat plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

@@ -1,5 +1,5 @@
 category: Audio
-requires: cygwin vlc esound
+requires: vlc esound
 external-source: vlc
 sdesc: "VideoLAN multimedia player (ESD plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

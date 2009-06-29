@@ -1,5 +1,5 @@
 category: Video
-requires: cygwin vlc libggi2
+requires: vlc libggi2
 external-source: vlc
 sdesc: "VideoLAN multimedia player (ggi plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

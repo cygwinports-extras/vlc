@@ -1,5 +1,5 @@
 category: Audio Video
-requires: cygwin vlc libgcrypt11 libgnutls26
+requires: vlc libgcrypt11 libgnutls26
 external-source: vlc
 sdesc: "VideoLAN multimedia player (gnutls plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

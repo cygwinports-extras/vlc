@@ -1,5 +1,5 @@
 category: Video
-requires: cygwin vlc libncurses8
+requires: vlc libncurses8
 external-source: vlc
 sdesc: "VideoLAN multimedia player (ncurses GUI)"
 ldesc: "VLC media player is a highly portable multimedia player for 

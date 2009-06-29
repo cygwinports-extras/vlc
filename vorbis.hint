@@ -1,5 +1,5 @@
 category: Audio
-requires: cygwin vlc libvorbis0 libvorbisenc2 vlc-plugin-ogg
+requires: vlc libvorbis0 libvorbisenc2 vlc-plugin-ogg
 external-source: vlc
 sdesc: "VideoLAN multimedia player (vorbis plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
