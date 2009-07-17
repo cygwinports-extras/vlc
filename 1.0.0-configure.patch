@@ -1,24 +1,15 @@
---- origsrc/vlc-0.9.0/configure.ac	2008-08-24 09:52:38.000000000 -0500
-+++ src/vlc-0.9.0/configure.ac	2008-08-26 01:38:57.575855100 -0500
-@@ -417,7 +417,7 @@
- dnl
- dnl Gettext stuff
- dnl
--AM_GNU_GETTEXT_VERSION([0.17])
-+AM_GNU_GETTEXT_VERSION([0.15])
- AM_GNU_GETTEXT([external])
- VLC_ADD_LIBS([libvlc vlc], [${LTLIBINTL}])
- 
-@@ -704,7 +704,7 @@
+--- origsrc/vlc-1.0.0/configure.ac	2009-07-16 11:11:17.272445300 -0500
++++ src/vlc-1.0.0/configure.ac	2009-07-16 00:56:14.544465200 -0500
+@@ -769,7 +769,7 @@ fi
  
  # Win32 style
  if test "${ac_cv_have_plugins}" = "no"; then
 -  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
 +  if test "${SYS}" = "mingw32"; then
      AC_CHECK_LIB(kernel32, main,
-      [VLC_ADD_LIBS([libvlc],[-lkernel32])
+      [VLC_ADD_LIBS([libvlccore],[-lkernel32])
        AC_DEFINE(HAVE_DL_WINDOWS, 1, [Define if you have Windows' LoadLibrary])
-@@ -885,8 +885,6 @@
+@@ -990,8 +990,6 @@ fi
  dnl Check for dbus
  AC_ARG_ENABLE(dbus,
    [  --enable-dbus           Linux D-BUS message bus system (default enabled)])
@@ -27,7 +18,7 @@
  if test "${enable_dbus}" != "no" -a "${SYS}" != "mingw32" -a "${SYS}" != "mingwce"
  then
    dnl api stable dbus
-@@ -918,8 +916,6 @@
+@@ -1023,8 +1021,6 @@ then
      [AC_MSG_ERROR([Couldn't find DBus >= 1.0.0, install libdbus-dev ?])]
    )
  fi
@@ -36,7 +27,18 @@
  
  dnl Build the gtk_main plugins?
  NEED_GTK_MAIN=no
-@@ -2177,7 +2173,7 @@
+@@ -1335,6 +1331,10 @@ elif test "${SYS}" != "mingwce"; then
+ else
+     VLC_ADD_PLUGIN([win32text])
+ fi
++if test "${SYS}" = "cygwin"; then
++    VLC_ADD_PLUGIN([dmo])
++    VLC_ADD_LDFLAGS([dmo],[-Wl,/usr/lib/w32api/libole32.a,/usr/lib/w32api/libuuid.a])
++fi
+ if test "${SYS}" = "darwin"; then
+     VLC_ADD_PLUGIN([quartztext])
+     VLC_ADD_LDFLAGS([quartztext],[-Wl,-framework,Carbon,-framework,ApplicationServices])
+@@ -2266,7 +2266,7 @@ AC_ARG_ENABLE(dshow,
    [  --enable-dshow          Win32 DirectShow support (default enabled on Win32)])
  if test "${enable_dshow}" != "no"
  then
@@ -45,7 +47,7 @@
    then
      AC_LANG_PUSH(C++)
        AC_CHECK_HEADERS(dshow.h,
-@@ -2196,7 +2192,7 @@
+@@ -2285,7 +2285,7 @@ AC_ARG_ENABLE(bda,
  		  enabled on Win32)]))
  if test "${enable_bda}" != "no"
  then
@@ -54,7 +56,7 @@
    then
        AC_CHECK_HEADERS(dshow.h,
        [ VLC_ADD_PLUGIN([bda])
-@@ -2215,7 +2211,7 @@
+@@ -2304,7 +2304,7 @@ if test "${enable_opencv}" = "yes" -a "$
  then
    AC_ARG_WITH(opencv-tree,
    [    --with-opencv-tree=PATH opencv tree for linking])
@@ -62,8 +64,17 @@
 +    if test "${SYS}" = "mingw32"
      then
        test -z "${with_opencv_tree}" && AC_MSG_ERROR([You have to specify --with-opencv-tree])
- 	  AC_MSG_CHECKING(for opencv in ${with_opencv_tree})
-@@ -4326,7 +4322,7 @@
+       AC_MSG_CHECKING(for opencv in ${with_opencv_tree})
+@@ -3280,7 +3280,7 @@ dnl
+ AC_ARG_ENABLE(quicktime,
+   [  --enable-quicktime      QuickTime module (deprecated)])
+ if test "${enable_quicktime}" = "yes"; then
+-  if test "${SYS}" = "mingw32"; then
++  if test "${SYS}" = "mingw32" -o "${SYS}" = "cygwin"; then
+     VLC_ADD_PLUGIN([quicktime])
+   else
+   AC_CHECK_HEADERS(QuickTime/QuickTime.h,
+@@ -4437,7 +4437,7 @@ dnl
  dnl  Windows DirectX module
  dnl
  
@@ -72,7 +83,7 @@
  then
    VLC_ADD_PLUGIN([panoramix])
  fi
-@@ -4335,7 +4331,7 @@
+@@ -4446,7 +4446,7 @@ AC_ARG_ENABLE(directx,
    [  --enable-directx        Win32 DirectX support (default enabled on Win32)])
  if test "${enable_directx}" != "no"
  then
@@ -81,7 +92,7 @@
    then
      AC_ARG_WITH(directx,
      [    --with-directx=PATH   Win32 DirectX headers])
-@@ -4543,7 +4539,7 @@
+@@ -4672,7 +4672,7 @@ dnl
  AC_ARG_ENABLE(wingdi,
    [  --enable-wingdi         Win32 GDI module (default enabled on Win32)])
  if test "${enable_wingdi}" != "no"; then
@@ -90,7 +101,7 @@
      VLC_ADD_PLUGIN([wingdi])
      VLC_ADD_LIBS([wingdi],[-lgdi32])
    fi
-@@ -4852,7 +4848,7 @@
+@@ -4953,7 +4953,7 @@ if test "${enable_skins2}" = "yes" ||
      fi
    fi
  
@@ -99,7 +110,7 @@
      VLC_ADD_PLUGIN([skins2])
      ALIASES="${ALIASES} svlc"
      VLC_ADD_CPPFLAGS([skins2],[-U_OFF_T_ -U_off_t -Imodules/gui/skins2 -DWIN32_SKINS])
-@@ -4912,7 +4908,7 @@
+@@ -5036,7 +5036,7 @@ AS_IF([test "${enable_qt4}" != "no"], [
      VLC_ADD_PLUGIN([qt4])
      AC_DEFINE([HAVE_QT4], 1, [Define to 1 if you have QT4 library.])
      ALIASES="${ALIASES} qvlc"
@@ -108,7 +119,7 @@
          VLC_ADD_LIBS([qt4],[$QT4_LIBS -lX11])
      ], [
          VLC_ADD_LIBS([qt4],[$QT4_LIBS])
-@@ -5377,7 +5373,7 @@
+@@ -5521,7 +5521,7 @@ AC_ARG_WITH(wine-sdk-path,
    [    --with-wine-sdk-path=PATH path to wine sdk])
  if test "${enable_activex}" != "no"
  then

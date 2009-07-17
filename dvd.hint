@@ -1,7 +1,7 @@
-category: Audio Video
-requires: vlc libavformat52 libavutil49
+category: Video
+requires: libgcc1 libvlccore2 libdvdnav4 libdvdread4
 external-source: vlc
-sdesc: "VideoLAN multimedia player (avformat plugin)"
+sdesc: "VideoLAN multimedia player (DVD plugins)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 

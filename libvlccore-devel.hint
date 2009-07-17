@@ -1,7 +1,7 @@
 category: Audio Video
-requires: vlc libX11_6 libXext6 libfreetype6 libfribidi0 zlib vlc-plugin-qt4
+requires: libvlccore2 libdbus1-devel libiconv gettext
 external-source: vlc
-sdesc: "VideoLAN multimedia player (skins2 GUI)"
+sdesc: "VideoLAN multimedia player (plugin libdevel)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 

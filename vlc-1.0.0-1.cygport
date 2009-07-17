@@ -1,0 +1,120 @@
+DESCRIPTION="VideoLAN multimedia client"
+HOMEPAGE="http://www.videolan.org/vlc/"
+SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
+PATCH_URI="
+	1.0.0-configure.patch
+	1.0.0-dmo.patch
+	0.9.0-freetype.patch
+	1.0.0-galaktos.patch
+	0.9.0-pagesize.patch
+	1.0.0-skins2-x11.patch
+	0.9.0-strerror_r.patch
+"
+
+PKG_NAMES="vlc vlc-gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
+PKG_HINTS="setup gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
+vlc_CONTENTS=" usr/bin/cvlc usr/bin/nvlc usr/bin/rvlc usr/bin/vlc*.exe
+               usr/lib/vlc/gui/*ncurses_plugin.* usr/share/doc/ usr/share/man/"
+vlc_gui_CONTENTS="--exclude=*ncurses_* etc/ usr/bin/qvlc usr/bin/svlc
+                  usr/lib/vlc/gui/ usr/share/applications/ usr/share/icons/
+                  usr/share/vlc/skins2/"
+libvlc2_CONTENTS="usr/bin/cygvlc-2.dll"
+libvlc_devel_CONTENTS="usr/include/vlc/*.h usr/lib/libvlc.* usr/lib/pkgconfig/libvlc.pc"
+libvlccore2_CONTENTS="usr/bin/cygvlccore-2.dll"
+libvlccore_devel_CONTENTS="usr/include/vlc/plugins/ usr/lib/libvlccore.* usr/lib/pkgconfig/vlc-plugin.pc"
+
+DIFF_EXCLUDES="m4"
+
+for m in a52 aa caca cd dca dirac dvbpsi dvd faad ffmpeg flac freetype \
+         gnomevfs goom id3tag kate libass libmpeg2 libnotify lua \
+         mad mkv mod mpc ogg png portaudio schroedinger sdl sdl_image \
+         shout speex svg taglib twolame x11 x264
+do
+	PKG_NAMES+=" vlc-plugins-${m}"
+	PKG_HINTS+=" ${m}"
+	CYGCONF_ARGS+=" --enable-${m}"
+
+	case ${m} in
+		a52)		p_n=a52tofloat32 ;;
+		cd)			p_n="cddax vcdx" ;;
+		dca)		p_n=dtstofloat32 ;;
+		dvbpsi)		p_n="ts mux_ts" ;;
+		dvd)		p_n="dvdnav dvdread" ;;
+		ffmpeg)		p_n="avcodec avformat postproc swscale" ;;
+		gnomevfs)	p_n=access_gnomevfs ;;
+		jack)		p_n="access_jack jack" ;;
+		libnotify)  p_n="notify" ;;
+		mad)		p_n="mpgatofixed32" ;;
+		ogg)		p_n="ogg mux_ogg theora vorbis" ;;
+		sdl)		p_n="aout_sdl vout_sdl" ;;
+		shout)		p_n=access_output_shout ;;
+		x11)		p_n="globalhotkeys glx opengl panoramix x11 x11_screen galaktos xosd" ;;
+		*)			p_n=${m} ;;
+	esac
+
+	for _p_n in ${p_n}
+	do
+		vlc_plugins_base_CONTENTS+=" --exclude=cyg${_p_n}_plugin.dll
+		                             --exclude=lib${_p_n}_plugin.la"
+		declare vlc_plugins_${m}_CONTENTS+=" usr/lib/vlc/*/cyg${_p_n}_plugin.dll
+		                                     usr/lib/vlc/*/lib${_p_n}_plugin.la"
+	done
+
+	case ${m} in
+	lua)
+		vlc_plugins_base_CONTENTS+=" --exclude=${m}"
+		vlc_plugins_lua_CONTENTS+=" usr/share/vlc/${m}/"
+		;;
+	esac
+done
+unset m p_n _p_n
+
+PKG_NAMES+=" vlc-plugins-base"
+PKG_HINTS+=" base"
+vlc_plugins_base_CONTENTS+=" --exclude=gui --exclude=skins2
+                             usr/lib/vlc/ usr/share/locale/ usr/share/vlc/"
+
+# libtar just does not work, uses zlib instead
+CYGCONF_ARGS+="
+  --disable-maintainer-mode
+  --disable-rpath
+  --enable-release
+  --with-dvbpsi=/usr
+"
+
+for y in a52 aa asademux avcodec avformat caca cddax cmml dbus dbus-control \
+         dca dirac dvbpsi dvdnav dvdread faad flac freetype fribidi \
+         galaktos glx gnomevfs gnutls goom httpd id3tag kate \
+         libass libcddb libcdio libgcrypt libproxy libmpeg2 libxml2 lua \
+         mad mkv mod mpc notify ogg opengl oss png portaudio postproc \
+         quicktime real realrtsp remoteosd schroedinger screen sdl sdl-image \
+         shout snapshot sout speex svg switcher swscale taglib telepathy \
+         theora tiger twolame vcdinfo vcdx visual vlm vorbis waveout \
+         x11 x264 xosd
+do
+	CYGCONF_ARGS+=" --enable-${y}"
+done
+
+# explicitely disable features not available
+# candidates for enabling: csri fludsynth ggi jack opencv pulse
+for n in activex alsa bda bonjour cdda csri cyberlink dc1394 directfb \
+         directx dshow dv dvb fb fbosd fluidsynth ggi gme growl hal \
+         hd1000a hd1000v jack libsysfs libtar libv4l2 lirc live555 loader \
+         macosx macosx-audio macosx-defaults mga mozilla omapfb opencv \
+         opie pda pulse pvr qnx qte smb svgalib tarkin telx testsuite \
+         tremor update-check upnp v4l v4l2 vcd wince wingdi \
+		 xvideo xvmc zvbi
+do
+	CYGCONF_ARGS+=" --disable-${n}"
+done
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	for res in 16x16 32x32 48x48 128x128
+	do
+		insinto /usr/share/icons/hicolor/${res}/apps
+		newins ${S}/share/vlc${res}.png vlc.png
+	done
+}

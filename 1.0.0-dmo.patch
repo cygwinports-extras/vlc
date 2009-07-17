@@ -1,0 +1,55 @@
+--- origsrc/vlc-1.0.0/modules/codec/dmo/buffer.c	2009-05-10 18:03:54.000000000 -0500
++++ src/vlc-1.0.0/modules/codec/dmo/buffer.c	2009-07-16 00:09:47.310112700 -0500
+@@ -33,7 +33,7 @@
+ #include <vlc_codec.h>
+ #include <vlc_vout.h>
+ 
+-#ifndef WIN32
++#if !defined(WIN32) && !defined(__CYGWIN__)
+ #    define LOADER
+ #else
+ #   include <objbase.h>
+--- origsrc/vlc-1.0.0/modules/codec/dmo/dmo.c	2009-05-17 18:33:23.000000000 -0500
++++ src/vlc-1.0.0/modules/codec/dmo/dmo.c	2009-07-16 00:10:09.337949300 -0500
+@@ -35,7 +35,7 @@
+ #include <vlc_vout.h>
+ #include <vlc_aout.h>
+ 
+-#ifndef WIN32
++#if !defined(WIN32) && !defined(__CYGWIN__)
+ #    define LOADER
+ #else
+ #   include <objbase.h>
+--- origsrc/vlc-1.0.0/modules/codec/quicktime.c	2009-05-10 18:03:54.000000000 -0500
++++ src/vlc-1.0.0/modules/codec/quicktime.c	2009-07-16 09:30:37.407882300 -0500
+@@ -36,14 +36,14 @@
+ #include <vlc_vout.h>
+ #include <vlc_codec.h>
+ 
+-#if !defined (__APPLE__) && !defined(WIN32)
+-# define LOADER 1
+-#endif
+-
+ #ifdef __APPLE__
+ #include <QuickTime/QuickTimeComponents.h>
+ #include <QuickTime/Movies.h>
+ #include <QuickTime/ImageCodec.h>
++#elif defined(WIN32) || defined(__CYGWIN__)
++# include <windows.h>
++#else
++# define LOADER 1
+ #endif
+ 
+ /* for windows do we require Quicktime compents header? */
+--- origsrc/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-05 06:34:48.000000000 -0500
++++ src/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-17 19:46:42.015625000 -0500
+@@ -491,6 +491,9 @@
+ 
+ static int OpenWin32Dll( decoder_t *p_dec, char *psz_path, char *psz_dll )
+ {
++#if defined(__CYGWIN__)
++    return OpenNativeDll ( p_dec, psz_path, psz_dll );
++#endif
+ #if defined(LOADER) || defined(WIN32)
+     decoder_sys_t *p_sys = p_dec->p_sys;
+     void *handle = 0, *context = 0;

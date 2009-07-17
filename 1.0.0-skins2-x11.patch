@@ -1,0 +1,31 @@
+Following the skins2 logic in configure, this should be refactored into:
+if HAVE_WIN32
+... win32/* ...
+else
+if HAVE_DARWIN
+... macosx/* ...
+else
+... x11/* ...
+endif
+endif
+
+--- origsrc/vlc-1.0.0/modules/gui/skins2/Modules.am	2009-05-10 18:03:55.000000000 -0500
++++ src/vlc-1.0.0/modules/gui/skins2/Modules.am	2009-07-16 10:23:50.348688900 -0500
+@@ -208,7 +208,8 @@ SOURCES_skins2 += \
+     $(NULL)
+ endif
+ 
+-if HAVE_LINUX
++if !HAVE_DARWIN
++if !HAVE_WIN32
+ SOURCES_skins2 += \
+ 	x11/x11_display.cpp \
+ 	x11/x11_display.hpp \
+@@ -230,6 +231,7 @@ SOURCES_skins2 += \
+ 	x11/x11_tooltip.hpp \
+     $(NULL)
+ endif
++endif
+ 
+ if HAVE_DARWIN
+ SOURCES_skins2 += \

@@ -1,7 +1,7 @@
-category: Video
-requires: vlc libtheora0 vlc-plugin-ogg
+category: Audio Video
+requires: libfreetype6 libfribidi0 libgcc1 libvlccore2 libQtCore4 libQtGui4 libstdc++6 libX11_6 libXext6 vlc zlib0
 external-source: vlc
-sdesc: "VideoLAN multimedia player (theora plugin)"
+sdesc: "VideoLAN multimedia player (GUI)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 
