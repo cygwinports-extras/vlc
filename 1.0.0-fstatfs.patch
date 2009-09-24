@@ -1,0 +1,15 @@
+--- origsrc/vlc-1.0.2/modules/access/file.c	2009-09-18 11:37:45.000000000 -0500
++++ src/vlc-1.0.2/modules/access/file.c	2009-09-24 10:55:51.894868700 -0500
+@@ -47,9 +47,11 @@
+ #ifdef HAVE_FCNTL_H
+ #   include <fcntl.h>
+ #endif
+-#if defined (__linux__)
++#ifdef HAVE_FSTATFS
+ #   include <sys/vfs.h>
++#if defined (__linux__)
+ #   include <linux/magic.h>
++#endif
+ #elif defined (HAVE_SYS_MOUNT_H)
+ #   include <sys/param.h>
+ #   include <sys/mount.h>

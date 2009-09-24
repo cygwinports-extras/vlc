@@ -5,6 +5,7 @@ PATCH_URI="
 	1.0.0-configure.patch
 	1.0.0-dmo.patch
 	0.9.0-freetype.patch
+	1.0.0-fstatfs.patch
 	1.0.0-galaktos.patch
 	0.9.0-pagesize.patch
 	1.0.0-skins2-x11.patch
@@ -13,8 +14,7 @@ PATCH_URI="
 
 PKG_NAMES="vlc vlc-gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
 PKG_HINTS="setup gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
-vlc_CONTENTS=" usr/bin/cvlc usr/bin/nvlc usr/bin/rvlc usr/bin/vlc*.exe
-               usr/lib/vlc/gui/*ncurses_plugin.* usr/share/doc/ usr/share/man/"
+vlc_CONTENTS="usr/bin/cvlc usr/bin/rvlc usr/bin/vlc*.exe usr/share/doc/ usr/share/man/"
 vlc_gui_CONTENTS="--exclude=*ncurses_* etc/ usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/gui/ usr/share/applications/ usr/share/icons/
                   usr/share/vlc/skins2/"
