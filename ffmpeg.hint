@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libvlccore2 libavcodec52 libavformat52 libavutil49 libpostproc51 libswscale0
+requires: libgcc1 libvlccore2 libavcodec52 libavformat52 libavutil50 libpostproc51 libswscale0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (FFmpeg plugins)"
 ldesc: "VLC media player is a highly portable multimedia player for 

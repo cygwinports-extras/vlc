@@ -2,7 +2,7 @@ DESCRIPTION="VideoLAN multimedia client"
 HOMEPAGE="http://www.videolan.org/vlc/"
 SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
 PATCH_URI="
-	1.0.0-configure.patch
+	1.0.5-configure.patch
 	1.0.0-dmo.patch
 	0.9.0-freetype.patch
 	1.0.0-fstatfs.patch
@@ -15,7 +15,7 @@ PATCH_URI="
 PKG_NAMES="vlc vlc-gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
 PKG_HINTS="setup gui libvlc2 libvlc-devel libvlccore2 libvlccore-devel"
 vlc_CONTENTS="usr/bin/cvlc usr/bin/rvlc usr/bin/vlc*.exe usr/share/doc/ usr/share/man/"
-vlc_gui_CONTENTS="--exclude=*ncurses_* etc/ usr/bin/qvlc usr/bin/svlc
+vlc_gui_CONTENTS="etc/ usr/bin/nvlc usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/gui/ usr/share/applications/ usr/share/icons/
                   usr/share/vlc/skins2/"
 libvlc2_CONTENTS="usr/bin/cygvlc-2.dll"
@@ -25,14 +25,13 @@ libvlccore_devel_CONTENTS="usr/include/vlc/plugins/ usr/lib/libvlccore.* usr/lib
 
 DIFF_EXCLUDES="m4"
 
-for m in a52 aa caca cd dca dirac dvbpsi dvd faad ffmpeg flac freetype \
-         gnomevfs goom id3tag kate libass libmpeg2 libnotify lua \
-         mad mkv mod mpc ogg png portaudio schroedinger sdl sdl_image \
+for m in a52 cd dca dirac dvbpsi dvd faad ffmpeg flac freetype \
+         goom id3tag kate libass libmpeg2 libnotify lua \
+         mad mkv mod mpc ogg opencv png portaudio schroedinger sdl sdl_image \
          shout speex svg taglib twolame x11 x264
 do
 	PKG_NAMES+=" vlc-plugins-${m}"
 	PKG_HINTS+=" ${m}"
-	CYGCONF_ARGS+=" --enable-${m}"
 
 	case ${m} in
 		a52)		p_n=a52tofloat32 ;;
@@ -46,6 +45,7 @@ do
 		libnotify)  p_n="notify" ;;
 		mad)		p_n="mpgatofixed32" ;;
 		ogg)		p_n="ogg mux_ogg theora vorbis" ;;
+		opencv)		p_n="opencv_example opencv_wrapper" ;;
 		sdl)		p_n="aout_sdl vout_sdl" ;;
 		shout)		p_n=access_output_shout ;;
 		x11)		p_n="globalhotkeys glx opengl panoramix x11 x11_screen galaktos xosd" ;;
@@ -74,6 +74,7 @@ PKG_HINTS+=" base"
 vlc_plugins_base_CONTENTS+=" --exclude=gui --exclude=skins2
                              usr/lib/vlc/ usr/share/locale/ usr/share/vlc/"
 
+CPPFLAGS+=" -I/usr/include/ncursesw"
 # libtar just does not work, uses zlib instead
 CYGCONF_ARGS+="
   --disable-maintainer-mode
@@ -82,11 +83,11 @@ CYGCONF_ARGS+="
   --with-dvbpsi=/usr
 "
 
-for y in a52 aa asademux avcodec avformat caca cddax cmml dbus dbus-control \
+for y in a52 asademux avcodec avformat cddax cmml dbus dbus-control \
          dca dirac dvbpsi dvdnav dvdread faad flac freetype fribidi \
-         galaktos glx gnomevfs gnutls goom httpd id3tag kate \
+         galaktos glx gnutls goom httpd id3tag kate \
          libass libcddb libcdio libgcrypt libproxy libmpeg2 libxml2 lua \
-         mad mkv mod mpc notify ogg opengl oss png portaudio postproc \
+         mad mkv mod mpc ncurses notify ogg opencv opengl oss png portaudio postproc \
          quicktime real realrtsp remoteosd schroedinger screen sdl sdl-image \
          shout snapshot sout speex svg switcher swscale taglib telepathy \
          theora tiger twolame vcdinfo vcdx visual vlm vorbis waveout \
@@ -96,11 +97,11 @@ do
 done
 
 # explicitely disable features not available
-# candidates for enabling: csri fludsynth ggi jack opencv pulse
-for n in activex alsa bda bonjour cdda csri cyberlink dc1394 directfb \
-         directx dshow dv dvb fb fbosd fluidsynth ggi gme growl hal \
+# candidates for enabling: csri fludsynth ggi jack pulse
+for n in aa activex alsa bda bonjour caca cdda csri cyberlink dc1394 directfb \
+         directx dshow dv dvb fb fbosd fluidsynth ggi gme gnomevfs growl hal \
          hd1000a hd1000v jack libsysfs libtar libv4l2 lirc live555 loader \
-         macosx macosx-audio macosx-defaults mga mozilla omapfb opencv \
+         macosx macosx-audio macosx-defaults mga mozilla omapfb \
          opie pda pulse pvr qnx qte smb svgalib tarkin telx testsuite \
          tremor update-check upnp v4l v4l2 vcd wince wingdi \
 		 xvideo xvmc zvbi

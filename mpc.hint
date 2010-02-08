@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 libmpcdec5
+requires: libgcc1 libvlccore2 libmpcdec7
 external-source: vlc
 sdesc: "VideoLAN multimedia player (MPC decoder plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
