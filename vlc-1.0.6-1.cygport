@@ -1,6 +1,6 @@
 DESCRIPTION="VideoLAN multimedia client"
 HOMEPAGE="http://www.videolan.org/vlc/"
-SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
+SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
 PATCH_URI="
 	1.0.5-configure.patch
 	1.0.0-dmo.patch
@@ -48,7 +48,7 @@ do
 		opencv)		p_n="opencv_example opencv_wrapper" ;;
 		sdl)		p_n="aout_sdl vout_sdl" ;;
 		shout)		p_n=access_output_shout ;;
-		x11)		p_n="globalhotkeys glx opengl panoramix x11 x11_screen galaktos xosd" ;;
+		x11)		p_n="globalhotkeys glx opengl panoramix x11 x11_screen galaktos" ;;
 		*)			p_n=${m} ;;
 	esac
 
@@ -91,7 +91,7 @@ for y in a52 asademux avcodec avformat cddax cmml dbus dbus-control \
          quicktime real realrtsp remoteosd schroedinger screen sdl sdl-image \
          shout snapshot sout speex svg switcher swscale taglib telepathy \
          theora tiger twolame vcdinfo vcdx visual vlm vorbis waveout \
-         x11 x264 xosd
+         x11 x264
 do
 	CYGCONF_ARGS+=" --enable-${y}"
 done
@@ -104,7 +104,7 @@ for n in aa activex alsa bda bonjour caca cdda csri cyberlink dc1394 directfb \
          macosx macosx-audio macosx-defaults mga mozilla omapfb \
          opie pda pulse pvr qnx qte smb svgalib tarkin telx testsuite \
          tremor update-check upnp v4l v4l2 vcd wince wingdi \
-		 xvideo xvmc zvbi
+		 xosd xvideo xvmc zvbi
 do
 	CYGCONF_ARGS+=" --disable-${n}"
 done
