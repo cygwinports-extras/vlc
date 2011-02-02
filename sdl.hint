@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libvlccore2 libSDL1.2_0
+requires: libgcc1 libvlccore4 libSDL1.2_0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (SDL audio/video output plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

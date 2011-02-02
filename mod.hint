@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 libmodplug0
+requires: libgcc1 libvlccore4 libmodplug0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (MOD decoder plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 libebml0 libmatroska0 libstdc++6 zlib0
+requires: libgcc1 libvlccore4 libebml3 libmatroska2 libstdc++6 zlib0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (Matroska decoder plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

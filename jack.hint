@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 jack-audio-connection-kit
+requires: libgcc1 libvlccore4 jack-audio-connection-kit
 external-source: vlc
 sdesc: "VideoLAN multimedia player (JACK audio output plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

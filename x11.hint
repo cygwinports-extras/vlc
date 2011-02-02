@@ -1,5 +1,5 @@
 category: Video
-requires: libgcc1 libvlccore2 libGL1 libX11_6 libxcb1 libxcb-keysyms1 libXext6
+requires: libgcc1 libvlccore4 libGL1 libX11_6 libX11-xcb1 libxcb1 libxcb-keysyms1 libxcb-randr0 libxcb-shm0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (X11 plugins)"
 ldesc: "VLC media player is a highly portable multimedia player for 

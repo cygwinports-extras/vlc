@@ -41,15 +41,3 @@
  #endif
  
  /* for windows do we require Quicktime compents header? */
---- origsrc/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-05 06:34:48.000000000 -0500
-+++ src/vlc-0.9.0-test2/modules/codec/realaudio.c	2008-07-17 19:46:42.015625000 -0500
-@@ -491,6 +491,9 @@
- 
- static int OpenWin32Dll( decoder_t *p_dec, char *psz_path, char *psz_dll )
- {
-+#if defined(__CYGWIN__)
-+    return OpenNativeDll ( p_dec, psz_path, psz_dll );
-+#endif
- #if defined(LOADER) || defined(WIN32)
-     decoder_sys_t *p_sys = p_dec->p_sys;
-     void *handle = 0, *context = 0;

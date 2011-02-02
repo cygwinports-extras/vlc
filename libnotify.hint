@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libvlccore2 libgdk_pixbuf2.0_0 libglib2.0_0 libnotify1
+requires: libgcc1 libvlccore4 libgdk_pixbuf2.0_0 libglib2.0_0 libnotify1
 external-source: vlc
 sdesc: "VideoLAN multimedia player (libnotify notification plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

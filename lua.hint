@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libvlccore2 lua
+requires: libgcc1 libvlccore4 lua
 external-source: vlc
 sdesc: "VideoLAN multimedia player (Lua scripting plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

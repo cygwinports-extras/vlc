@@ -1,0 +1,105 @@
+DESCRIPTION="VideoLAN multimedia client"
+HOMEPAGE="http://www.videolan.org/vlc/"
+SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
+
+PATCH_URI="
+	1.1.7-configure.patch
+	1.1.7-freetype.patch
+	1.1.7-posix_spawn.patch
+	1.1.7-time.h.patch
+"
+
+PKG_NAMES="vlc vlc-gui libvlc5 libvlccore4 libvlc-devel"
+PKG_HINTS="setup gui libvlc5 libvlccore4 libvlc-devel"
+vlc_CONTENTS="usr/bin/cvlc usr/bin/rvlc usr/bin/vlc*.exe usr/share/doc/ usr/share/man/"
+vlc_gui_CONTENTS="etc/ usr/bin/nvlc usr/bin/qvlc usr/bin/svlc
+                  usr/lib/vlc/plugins/gui/ usr/share/applications/ usr/share/icons/
+                  usr/share/kde4/ usr/share/vlc/skins2/"
+libvlc5_CONTENTS="usr/bin/cygvlc-5.dll"
+libvlccore4_CONTENTS="usr/bin/cygvlccore-4.dll"
+libvlc_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
+
+DIFF_EXCLUDES="m4"
+
+for m in a52 dca dirac dvbpsi dvd faad ffmpeg flac freetype \
+         goom id3tag kate libass libmpeg2 libnotify lua \
+         mad mkv mod mpc ogg opencv png portaudio projectm schroedinger \
+         sdl sdl_image shout speex sqlite svg taglib twolame vcd x11 x264
+do
+	PKG_NAMES+=" vlc-plugins-${m}"
+	PKG_HINTS+=" ${m}"
+
+	case ${m} in
+		a52)		p_n=a52tofloat32 ;;
+		dca)		p_n=dtstofloat32 ;;
+		dvbpsi)		p_n="ts mux_ts" ;;
+		dvd)		p_n="dvdnav dvdread" ;;
+		ffmpeg)		p_n="access_avio avcodec avformat postproc swscale stream_out_switcher" ;;
+		gnomevfs)	p_n=access_gnomevfs ;;
+		jack)		p_n="access_jack jack" ;;
+		libnotify)  p_n="notify" ;;
+		mad)		p_n="mpgatofixed32" ;;
+		ogg)		p_n="ogg mux_ogg theora vorbis" ;;
+		opencv)		p_n="opencv_example opencv_wrapper" ;;
+		sdl)		p_n="aout_sdl vout_sdl" ;;
+		shout)		p_n=access_output_shout ;;
+		vcd)		p_n=vcdx ;;
+		x11)		p_n="globalhotkeys panoramix xcb_apps xcb_glx xcb_screen xcb_window xcb_x11" ;;
+		*)			p_n=${m} ;;
+	esac
+
+	for _p_n in ${p_n}
+	do
+		vlc_plugins_base_CONTENTS+=" --exclude=cyg${_p_n}_plugin.dll
+		                             --exclude=lib${_p_n}_plugin.la"
+		declare vlc_plugins_${m}_CONTENTS+=" usr/lib/vlc/plugins/*/cyg${_p_n}_plugin.dll
+		                                     usr/lib/vlc/plugins/*/lib${_p_n}_plugin.la"
+	done
+
+	case ${m} in
+	lua)
+		vlc_plugins_base_CONTENTS+=" --exclude=${m}"
+		vlc_plugins_lua_CONTENTS+=" usr/lib/vlc/lua/ usr/share/vlc/lua/"
+		;;
+	esac
+done
+unset m p_n _p_n
+
+PKG_NAMES+=" vlc-plugins-base"
+PKG_HINTS+=" base"
+vlc_plugins_base_CONTENTS+=" --exclude=gui --exclude=skins2
+                             usr/lib/vlc/ usr/share/locale/ usr/share/vlc/"
+
+CPPFLAGS+=" -I/usr/include/ncursesw"
+# libtar just does not work, uses zlib instead
+CYGCONF_ARGS+="
+  --disable-maintainer-mode
+  --disable-rpath
+  --with-dvbpsi=/usr
+"
+
+for y in a52 asademux avcodec avformat dbus dbus-control \
+         dca dirac dvbpsi dvdnav dvdread faad flac freetype fribidi \
+         glx gnutls goom httpd id3tag kate \
+         libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
+         mad mkv mod mpc ncurses notify ogg opencv opengl oss \
+         png portaudio postproc projectm real realrtsp remoteosd \
+         schroedinger screen sdl sdl-image shout snapshot sout speex \
+         sqlite svg switcher swscale taglib telepathy theora tiger twolame \
+         vcdx visual vlm vorbis waveout xcb x264
+do
+	CYGCONF_ARGS+=" --enable-${y}"
+done
+
+# explicitely disable features not available
+# candidates for enabling: fludsynth ggi jack pulse
+for n in aa activex alsa bda bonjour caca cyberlink dc1394 directfb \
+         directx dshow dv dvb fb fbosd fluidsynth ggi gme gnomevfs growl \
+         hd1000a hd1000v jack libtar libv4l2 lirc live555 loader \
+         macosx macosx-audio macosx-defaults mozilla omapfb osso_screensaver \
+         quicktime pulse pvr smb svgalib telx \
+         tremor update-check upnp v4l v4l2 vcd wingdi \
+         xosd xvideo zvbi
+do
+	CYGCONF_ARGS+=" --disable-${n}"
+done

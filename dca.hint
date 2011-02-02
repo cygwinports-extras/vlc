@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 libdca0
+requires: libgcc1 libvlccore4 libdca0
 external-source: vlc
 sdesc: "VideoLAN multimedia player (DTS decoder plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

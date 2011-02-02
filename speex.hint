@@ -1,5 +1,5 @@
 category: Audio
-requires: libgcc1 libvlccore2 libspeex1
+requires: libgcc1 libvlccore4 libspeex1
 external-source: vlc
 sdesc: "VideoLAN multimedia player (Speex decoder plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 

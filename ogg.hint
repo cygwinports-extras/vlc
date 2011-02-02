@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libvlccore2 libogg0 libtheora0 libvorbis0 libvorbisenc2
+requires: libgcc1 libvlccore4 libogg0 libtheora0 libvorbis0 libvorbisenc2
 external-source: vlc
 sdesc: "VideoLAN multimedia player (Ogg decoder plugins)"
 ldesc: "VLC media player is a highly portable multimedia player for 
