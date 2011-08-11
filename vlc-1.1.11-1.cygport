@@ -7,6 +7,7 @@ PATCH_URI="
 	1.1.10-freetype.patch
 	1.1.7-posix_spawn.patch
 	1.1.7-time.h.patch
+	1.1.11-opencv22.patch
 "
 
 PKG_NAMES="vlc vlc-gui libvlc5 libvlccore4 libvlc-devel"
