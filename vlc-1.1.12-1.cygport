@@ -5,7 +5,6 @@ SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.bz2"
 PATCH_URI="
 	1.1.7-configure.patch
 	1.1.10-freetype.patch
-	1.1.7-posix_spawn.patch
 	1.1.7-time.h.patch
 	1.1.11-opencv22.patch
 "
@@ -22,7 +21,7 @@ libvlc_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
 
 DIFF_EXCLUDES="m4"
 
-for m in a52 bonjour dca dirac dvbpsi dvd faad ffmpeg flac freetype \
+for m in a52 bonjour dca dirac dvbpsi dvd faad ffmpeg flac fluidsynth freetype \
          goom id3tag kate libass libmpeg2 libnotify lua \
          mad mkv mod mpc ogg opencv png portaudio projectm schroedinger \
          sdl sdl_image shout speex sqlite svg taglib twolame vcd x11 x264
@@ -80,7 +79,7 @@ CYGCONF_ARGS+="
 "
 
 for y in a52 asademux avcodec avformat bonjour dbus dbus-control \
-         dca dirac dvbpsi dvdnav dvdread faad flac freetype fribidi \
+         dca dirac dvbpsi dvdnav dvdread faad flac fluidsynth freetype fribidi \
          glx gnutls goom httpd id3tag kate \
          libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
          mad mkv mod mpc ncurses notify ogg opencv opengl oss \
@@ -93,9 +92,9 @@ do
 done
 
 # explicitely disable features not available
-# candidates for enabling: fludsynth ggi jack pulse
+# candidates for enabling: ggi jack pulse
 for n in aa activex alsa bda caca cyberlink dc1394 directfb \
-         directx dshow dv dvb fb fbosd fluidsynth ggi gme gnomevfs growl \
+         directx dshow dv dvb fb fbosd ggi gme gnomevfs growl \
          hd1000a hd1000v jack libtar libv4l2 lirc live555 loader \
          macosx macosx-audio macosx-defaults mozilla omapfb osso_screensaver \
          quicktime pulse pvr smb svgalib telx \
