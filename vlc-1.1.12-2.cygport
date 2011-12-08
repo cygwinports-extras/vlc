@@ -23,7 +23,7 @@ DIFF_EXCLUDES="m4"
 
 for m in a52 bonjour dca dirac dvbpsi dvd faad ffmpeg flac fluidsynth freetype \
          goom id3tag kate libass libmpeg2 libnotify lua \
-         mad mkv mod mpc ogg opencv png portaudio projectm schroedinger \
+         mad mkv mod mpc ogg opencv png portaudio projectm pulse schroedinger \
          sdl sdl_image shout speex sqlite svg taglib twolame vcd x11 x264
 do
 	PKG_NAMES+=" vlc-plugins-${m}"
@@ -83,7 +83,7 @@ for y in a52 asademux avcodec avformat bonjour dbus dbus-control \
          glx gnutls goom httpd id3tag kate \
          libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
          mad mkv mod mpc ncurses notify ogg opencv opengl oss \
-         png portaudio postproc projectm real realrtsp remoteosd \
+         png portaudio postproc projectm pulse real realrtsp remoteosd \
          schroedinger screen sdl sdl-image shout snapshot sout speex \
          sqlite svg switcher swscale taglib telepathy theora tiger twolame \
          vcdx visual vlm vorbis waveout xcb x264
@@ -92,12 +92,12 @@ do
 done
 
 # explicitely disable features not available
-# candidates for enabling: ggi jack pulse
+# candidates for enabling: ggi jack
 for n in aa activex alsa bda caca cyberlink dc1394 directfb \
          directx dshow dv dvb fb fbosd ggi gme gnomevfs growl \
          hd1000a hd1000v jack libtar libv4l2 lirc live555 loader \
          macosx macosx-audio macosx-defaults mozilla omapfb osso_screensaver \
-         quicktime pulse pvr smb svgalib telx \
+         quicktime pvr smb svgalib telx \
          tremor update-check upnp v4l v4l2 vcd wingdi \
          xosd xvideo zvbi
 do

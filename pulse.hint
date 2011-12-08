@@ -1,7 +1,7 @@
-category: Audio Video
-requires: libgcc1 libvlccore4 libcdio13 libvcdinfo0
+category: Audio
+requires: libgcc1 libvlccore4 libpulse0
 external-source: vlc
-sdesc: "VideoLAN multimedia player (CD input plugins)"
+sdesc: "VideoLAN multimedia player (PulseAudio audio output plugin)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
 ...) as well as DVDs, VCDs, and various streaming protocols. It can also 
