@@ -19,6 +19,16 @@
  
  #include <vlc_common.h>
  #include <vlc_url.h>
+--- origsrc/vlc-1.1.13/src/misc/pthread.c	2011-10-11 11:22:39.000000000 -0500
++++ src/vlc-1.1.13/src/misc/pthread.c	2012-02-12 09:35:20.372001200 -0600
+@@ -36,6 +36,7 @@
+ #include <unistd.h> /* fsync() */
+ #include <signal.h>
+ #include <errno.h>
++#include <time.h>
+ 
+ #include <sched.h>
+ #ifdef __linux__
 --- origsrc/vlc-1.1.7/src/video_output/video_epg.c	2010-04-12 19:22:28.000000000 -0500
 +++ src/vlc-1.1.7/src/video_output/video_epg.c	2011-02-01 07:42:58.470409800 -0600
 @@ -23,6 +23,7 @@

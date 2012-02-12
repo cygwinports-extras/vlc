@@ -12,7 +12,7 @@ PATCH_URI="
 PKG_NAMES="vlc vlc-gui libvlc5 libvlccore4 libvlc-devel"
 PKG_HINTS="setup gui libvlc5 libvlccore4 libvlc-devel"
 vlc_CONTENTS="usr/bin/cvlc usr/bin/rvlc usr/bin/vlc*.exe usr/share/doc/ usr/share/man/"
-vlc_gui_CONTENTS="etc/ usr/bin/nvlc usr/bin/qvlc usr/bin/svlc
+vlc_gui_CONTENTS="etc/postinstall/vlc.sh usr/bin/nvlc usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/plugins/gui/ usr/share/applications/ usr/share/icons/
                   usr/share/kde4/ usr/share/vlc/skins2/"
 libvlc5_CONTENTS="usr/bin/cygvlc-5.dll"
@@ -48,12 +48,12 @@ do
 		*)			p_n=${m} ;;
 	esac
 
+	declare vlc_plugins_${m}_CONTENTS="etc/postinstall/vlc-plugins-base.sh"
+
 	for _p_n in ${p_n}
 	do
-		vlc_plugins_base_CONTENTS+=" --exclude=cyg${_p_n}_plugin.dll
-		                             --exclude=lib${_p_n}_plugin.la"
-		declare vlc_plugins_${m}_CONTENTS+=" usr/lib/vlc/plugins/*/cyg${_p_n}_plugin.dll
-		                                     usr/lib/vlc/plugins/*/lib${_p_n}_plugin.la"
+		vlc_plugins_base_CONTENTS+=" --exclude=cyg${_p_n}_plugin.dll"
+		declare vlc_plugins_${m}_CONTENTS+=" usr/lib/vlc/plugins/*/cyg${_p_n}_plugin.dll"
 	done
 
 	case ${m} in
@@ -67,7 +67,7 @@ unset m p_n _p_n
 
 PKG_NAMES+=" vlc-plugins-base"
 PKG_HINTS+=" base"
-vlc_plugins_base_CONTENTS+=" --exclude=gui --exclude=skins2
+vlc_plugins_base_CONTENTS+=" --exclude=gui --exclude=skins2 etc/postinstall/vlc-plugins-base.sh
                              usr/lib/vlc/ usr/share/locale/ usr/share/vlc/"
 
 CPPFLAGS+=" -I/usr/include/ncursesw"
@@ -103,3 +103,5 @@ for n in aa activex alsa bda caca cyberlink dc1394 directfb \
 do
 	CYGCONF_ARGS+=" --disable-${n}"
 done
+
+KEEP_LA_FILES="none"
