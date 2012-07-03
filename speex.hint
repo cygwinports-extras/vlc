@@ -1,9 +1,0 @@
-category: Audio
-requires: libgcc1 libvlccore4 libspeex1
-external-source: vlc
-sdesc: "VideoLAN multimedia player (Speex decoder plugin)"
-ldesc: "VLC media player is a highly portable multimedia player for 
-various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 
-...) as well as DVDs, VCDs, and various streaming protocols. It can also 
-be used as a server to stream in unicast or multicast in IPv4 or IPv6 on 
-a high-bandwidth network."

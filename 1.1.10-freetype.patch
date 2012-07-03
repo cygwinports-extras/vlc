@@ -1,5 +1,5 @@
---- origsrc/vlc-1.1.10/modules/misc/freetype.c
-+++ src/vlc-1.1.10/modules/misc/freetype.c
+--- a/modules/text_renderer/freetype.c
++++ b/modules/text_renderer/freetype.c
 @@ -66,6 +66,9 @@
  #elif defined( HAVE_MAEMO )
  # define DEFAULT_FONT_FILE "/usr/share/fonts/nokia/nosnb.ttf"

@@ -1,0 +1,24 @@
+--- origsrc/vlc-2.0.2/Makefile.am	2012-06-20 13:07:49.000000000 -0500
++++ src/vlc-2.0.2/Makefile.am	2012-07-02 23:52:07.119416900 -0500
+@@ -482,6 +482,7 @@ vlc$(EXEEXT):
+ install-exec-hook:
+ 	if test "$(build)" = "$(host)"; then \
+ 		LD_LIBRARY_PATH="$(DESTDIR)$(libdir):$$LD_LIBRARY_PATH" \
++		PATH="$(DESTDIR)$(bindir):$$PATH" \
+ 		"$(DESTDIR)$(vlclibdir)/vlc-cache-gen$(EXEEXT)" \
+ 			 "$(DESTDIR)$(vlclibdir)/plugins" ; \
+ 	else \
+--- origsrc/vlc-2.0.1/src/modules/bank.c	2011-12-08 12:00:28.000000000 -0600
++++ src/vlc-2.0.1/src/modules/bank.c	2012-05-20 20:49:16.642826100 -0500
+@@ -422,7 +422,11 @@ static void AllocatePluginDir (module_ba
+ 
+         if (S_ISREG (st.st_mode))
+         {
++#ifdef __CYGWIN__
++            static const char prefix[] = "cyg";
++#else
+             static const char prefix[] = "lib";
++#endif
+             static const char suffix[] = "_plugin"LIBEXT;
+             size_t len = strlen (file);
+ 

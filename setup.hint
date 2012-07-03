@@ -1,5 +1,5 @@
 category: Audio Video
-requires: libgcc1 libncursesw10 libvlc5 libvlccore4
+requires: liba52_0 libass4 libavahi-client3 libavahi-common3 libavcodec53 libavformat53 libavutil51 libbluray1 libcdio13 libdbus1_3 libdca0 libdirac0 libdvbpsi7 libdvdnav4 libdvdread4 libebml3 libfaad2 libFLAC8 libfluidsynth1 libfontconfig1 libfreetype6 libfribidi0 libgcc1 libgcrypt11 libgdk_pixbuf2.0_0 libglib2.0_0 libgnutls26 libgoom2_0 libgpg-error0 libiconv2 libintl8 libkate1 libmad0 libmatroska2 libmodplug1 libmpcdec7 libmpeg2_0 libncursesw10 libogg0 libpng14 libportaudio2 libpostproc52 libproxy1 libpulse0 librsvg2_2 libsamplerate0 libschroedinger1.0_0 libshout3 libspeex1 libssh2_1 libstdc++6 libswscale2 libtag1 libtheoradec1 libtheoraenc1 libtiger5 libtwolame0 libvcdinfo0 libvorbis0 libvorbisenc2 libx264_120 libxml2 lua zlib0
 sdesc: "VideoLAN multimedia player (CLI)"
 ldesc: "VLC media player is a highly portable multimedia player for 
 various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg, 

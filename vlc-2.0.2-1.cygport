@@ -1,0 +1,64 @@
+DESCRIPTION="VideoLAN multimedia client"
+HOMEPAGE="http://www.videolan.org/vlc/"
+SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.xz"
+
+PATCH_URI="
+	1.1.7-configure.patch
+	1.1.10-freetype.patch
+	1.1.11-opencv22.patch
+	2.0.2-getmntent_r.patch
+	2.0.1-misc.patch
+	2.0.1-module-cache.patch
+"
+
+PKG_NAMES="vlc vlc-gui vlc-devel"
+PKG_HINTS="setup gui devel"
+vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2* --exclude=*globalhotkeys*
+              --exclude=*panoramix* --exclude=*projectm* --exclude=*sdl*
+              --exclude=*xcb* --exclude=cygnotify* --exclude=plugins.dat
+              etc/postinstall/ etc/preremove/ usr/bin/cvlc usr/bin/cygvlc*
+              usr/bin/nvlc usr/bin/rvlc usr/bin/vlc*.exe usr/lib/vlc/
+              usr/share/doc/ usr/share/locale/ usr/share/man/ usr/share/vlc/"
+vlc_gui_CONTENTS="etc/postinstall/ usr/bin/qvlc usr/bin/svlc
+                  usr/lib/vlc/plugins/*/*qt4* usr/lib/vlc/plugins/*/*skins2*
+                  usr/lib/vlc/plugins/*/*globalhotkeys* usr/lib/vlc/plugins/*/*panoramix*
+                  usr/lib/vlc/plugins/*/*sdl* usr/lib/vlc/plugins/*/*projectm*
+                  usr/lib/vlc/plugins/*/*xcb* usr/lib/vlc/plugins/*/cygnotify*
+                  usr/share/applications/ usr/share/icons/
+                  usr/share/kde4/apps/ usr/share/vlc/skins2/"
+vlc_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
+PKG_IGNORE="usr/lib/vlc/plugins/plugins*.dat"
+
+DIFF_EXCLUDES="m4"
+
+CPPFLAGS+=" -I/usr/include/ncursesw"
+# libtar just does not work, uses zlib instead
+CYGCONF_ARGS+="
+  --disable-maintainer-mode
+  --disable-rpath
+"
+
+for y in a52 avcodec avformat bluray bonjour dbus dbus-control \
+         dca dirac dvbpsi dvdnav dvdread faad flac fluidsynth freetype fribidi \
+         glx gnutls goom httpd kate \
+         libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
+         mad mkv mod mpc ncurses notify ogg oss \
+         png portaudio postproc projectm pulse real realrtsp \
+         schroedinger screen sdl sdl-image sftp shout sout speex \
+         sqlite svg switcher swscale taglib telepathy theora tiger twolame \
+         vcdx visual vlm vorbis waveout xcb x264
+do
+	CYGCONF_ARGS+=" --enable-${y}"
+done
+
+# explicitely disable features not available
+# candidates for enabling: ggi jack
+for n in aa alsa caca dc1394 directfb directx dshow dv fbosd gme gnomevfs \
+         growl jack libtar lirc live555 loader macosx macosx-audio opencv \
+         quicktime pvr smb telx tremor update-check upnp v4l2 vcd wingdi \
+         xosd xvideo zvbi
+do
+	CYGCONF_ARGS+=" --disable-${n}"
+done
+
+KEEP_LA_FILES="none"
