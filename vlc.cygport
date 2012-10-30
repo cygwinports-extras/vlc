@@ -1,4 +1,13 @@
-DESCRIPTION="VideoLAN multimedia client"
+NAME="vlc"
+VERSION=2.0.4
+RELEASE=1
+CATEGORY="Audio Video"
+SUMMARY="VideoLAN multimedia player"
+DESCRIPTION="VLC media player is a highly portable multimedia player for
+various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg,
+...) as well as DVDs, VCDs, and various streaming protocols. It can also
+be used as a server to stream in unicast or multicast in IPv4 or IPv6 on
+a high-bandwidth network."
 HOMEPAGE="http://www.videolan.org/vlc/"
 SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.xz"
 
@@ -6,19 +15,19 @@ PATCH_URI="
 	1.1.7-configure.patch
 	1.1.10-freetype.patch
 	1.1.11-opencv22.patch
-	2.0.2-getmntent_r.patch
 	2.0.1-misc.patch
 	2.0.1-module-cache.patch
 "
 
 PKG_NAMES="vlc vlc-gui vlc-devel"
-PKG_HINTS="setup gui devel"
+vlc_SUMMARY="${SUMMARY} (command-line interfaces)"
 vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2* --exclude=*globalhotkeys*
               --exclude=*panoramix* --exclude=*projectm* --exclude=*sdl*
               --exclude=*xcb* --exclude=cygnotify* --exclude=plugins.dat
               etc/postinstall/ etc/preremove/ usr/bin/cvlc usr/bin/cygvlc*
               usr/bin/nvlc usr/bin/rvlc usr/bin/vlc*.exe usr/lib/vlc/
               usr/share/doc/ usr/share/locale/ usr/share/man/ usr/share/vlc/"
+vlc_gui_SUMMARY="${SUMMARY} (GUIs)"
 vlc_gui_CONTENTS="etc/postinstall/ usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/plugins/*/*qt4* usr/lib/vlc/plugins/*/*skins2*
                   usr/lib/vlc/plugins/*/*globalhotkeys* usr/lib/vlc/plugins/*/*panoramix*
@@ -26,6 +35,7 @@ vlc_gui_CONTENTS="etc/postinstall/ usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/plugins/*/*xcb* usr/lib/vlc/plugins/*/cygnotify*
                   usr/share/applications/ usr/share/icons/
                   usr/share/kde4/apps/ usr/share/vlc/skins2/"
+vlc_devel_SUMMARY="${SUMMARY} (library development)"
 vlc_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
 PKG_IGNORE="usr/lib/vlc/plugins/plugins*.dat"
 
