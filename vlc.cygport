@@ -1,5 +1,5 @@
 NAME="vlc"
-VERSION=2.0.4
+VERSION=2.0.5
 RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="VideoLAN multimedia player"
