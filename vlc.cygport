@@ -1,5 +1,5 @@
 NAME="vlc"
-VERSION=2.0.5
+VERSION=2.0.8a
 RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="VideoLAN multimedia player"
@@ -9,12 +9,12 @@ various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, mp3, ogg,
 be used as a server to stream in unicast or multicast in IPv4 or IPv6 on
 a high-bandwidth network."
 HOMEPAGE="http://www.videolan.org/vlc/"
-SRC_URI="http://downloads.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.xz"
+SRC_URI="http://downloads.videolan.org/pub/videolan/vlc/${VERSION%[a-z]}/vlc-${VERSION}.tar.xz"
+SRC_DIR="vlc-${VERSION%[a-z]}"
 
 PATCH_URI="
 	1.1.7-configure.patch
 	1.1.10-freetype.patch
-	1.1.11-opencv22.patch
 	2.0.1-misc.patch
 	2.0.1-module-cache.patch
 "
@@ -50,7 +50,7 @@ CYGCONF_ARGS+="
 
 for y in a52 avcodec avformat bluray bonjour dbus dbus-control \
          dca dirac dvbpsi dvdnav dvdread faad flac fluidsynth freetype fribidi \
-         glx gnutls goom httpd kate \
+         glx gme gnutls goom httpd kate \
          libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
          mad mkv mod mpc ncurses notify ogg oss \
          png portaudio postproc projectm pulse real realrtsp \
@@ -63,7 +63,8 @@ done
 
 # explicitely disable features not available
 # candidates for enabling: ggi jack
-for n in aa alsa caca dc1394 directfb directx dshow dv fbosd gme gnomevfs \
+# opencv: FTBFS
+for n in aa alsa caca dc1394 directfb directx dshow dv fbosd gnomevfs \
          growl jack libtar lirc live555 loader macosx macosx-audio opencv \
          quicktime pvr smb telx tremor update-check upnp v4l2 vcd wingdi \
          xosd xvideo zvbi
