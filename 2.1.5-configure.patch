@@ -1,0 +1,11 @@
+--- origsrc/vlc-2.1.5/configure.ac	2014-02-27 09:17:45.000000000 -0600
++++ src/vlc-2.1.5/configure.ac	2015-01-15 22:57:27.939677700 -0600
+@@ -196,7 +196,7 @@ case "${host_os}" in
+         LD="${LD} -mmacosx_version_min=${with_macosx_version_min}"
+     fi
+     ;;
+-  *mingw32* | *cygwin* | *wince* | *mingwce*)
++  *mingw32* | *wince* | *mingwce*)
+     AC_CHECK_TOOL(WINDRES, windres, :)
+     AC_CHECK_TOOL(OBJCOPY, objcopy, :)
+     AH_TOP([#if defined(_WIN32) && !defined(_WIN32_WINNT)])

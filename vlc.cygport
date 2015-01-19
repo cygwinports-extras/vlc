@@ -1,7 +1,7 @@
 inherit qt4
 
 NAME="vlc"
-VERSION=2.0.8a
+VERSION=2.1.5
 RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="VideoLAN multimedia player"
@@ -13,16 +13,17 @@ a high-bandwidth network."
 HOMEPAGE="http://www.videolan.org/vlc/"
 SRC_URI="http://downloads.videolan.org/pub/videolan/vlc/${VERSION%[a-z]}/vlc-${VERSION}.tar.xz"
 SRC_DIR="vlc-${VERSION%[a-z]}"
-
 PATCH_URI="
-	1.1.7-configure.patch
-	1.1.10-freetype.patch
-	2.0.1-misc.patch
-	2.0.1-module-cache.patch
+	2.1.5-configure.patch
+	2.1.5-fonts.patch
+	2.1.5-misc.patch
+	2.1.5-module-cache.patch
+	2.1.5-symbols.patch
 "
 
 PKG_NAMES="vlc vlc-gui vlc-devel"
 vlc_SUMMARY="${SUMMARY} (command-line interfaces)"
+vlc_REQUIRES="font-freefont-ttf"
 vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2* --exclude=*globalhotkeys*
               --exclude=*panoramix* --exclude=*projectm* --exclude=*sdl*
               --exclude=*xcb* --exclude=cygnotify* --exclude=plugins.dat
@@ -43,7 +44,6 @@ PKG_IGNORE="usr/lib/vlc/plugins/plugins*.dat"
 
 DIFF_EXCLUDES="m4"
 
-CPPFLAGS+=" -I/usr/include/ncursesw"
 # libtar just does not work, uses zlib instead
 CYGCONF_ARGS+="
   --disable-maintainer-mode
@@ -53,15 +53,15 @@ CYGCONF_ARGS+="
   ac_cv_path_UIC=${QT4_UIC}
 "
 
-for y in a52 avcodec avformat bluray bonjour dbus dbus-control \
+for y in a52 avcodec avformat bluray bonjour dbus \
          dca dirac dvbpsi dvdnav dvdread faad flac fluidsynth freetype fribidi \
          glx gme gnutls goom httpd kate \
-         libass libcddb libgcrypt libproxy libmpeg2 libxml2 lua \
-         mad mkv mod mpc ncurses notify ogg oss \
-         png portaudio postproc projectm pulse real realrtsp \
+         libass libcddb libgcrypt libmpeg2 libxml2 lua \
+         mad mkv mod mpc ncurses notify ogg \
+         png postproc projectm pulse realrtsp \
          schroedinger screen sdl sdl-image sftp shout sout speex \
-         sqlite svg switcher swscale taglib telepathy theora tiger twolame \
-         vcdx visual vlm vorbis waveout xcb x264
+         svg swscale taglib theora tiger twolame \
+         vcdx vlm vorbis xcb x264
 do
 	CYGCONF_ARGS+=" --enable-${y}"
 done
@@ -69,10 +69,10 @@ done
 # explicitely disable features not available
 # candidates for enabling: ggi jack
 # opencv: FTBFS
-for n in aa alsa caca dc1394 directfb directx dshow dv fbosd gnomevfs \
-         growl jack libtar lirc live555 loader macosx macosx-audio opencv \
-         quicktime pvr smb telx tremor update-check upnp v4l2 vcd wingdi \
-         xosd xvideo zvbi
+for n in aa alsa caca dc1394 directfb directx gnomevfs \
+         growl jack libtar lirc live555 macosx macosx-audio opencv \
+         oss quicktime telx tremor update-check upnp v4l2 vcd \
+         wasapi waveout xvideo zvbi
 do
 	CYGCONF_ARGS+=" --disable-${n}"
 done
