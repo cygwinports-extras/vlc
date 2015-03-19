@@ -2,7 +2,7 @@ inherit qt4
 
 NAME="vlc"
 VERSION=2.1.5
-RELEASE=1
+RELEASE=2
 CATEGORY="Audio Video"
 SUMMARY="VideoLAN multimedia player"
 DESCRIPTION="VLC media player is a highly portable multimedia player for
