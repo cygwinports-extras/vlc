@@ -1,6 +1,6 @@
---- origsrc/vlc-2.1.5/modules/text_renderer/freetype.c	2014-02-14 11:40:50.000000000 -0600
-+++ src/vlc-2.1.5/modules/text_renderer/freetype.c	2015-01-15 22:16:37.353512200 -0600
-@@ -67,9 +67,9 @@
+--- origsrc/vlc-2.2.1/modules/text_renderer/platform_fonts.h
++++ src/vlc-2.2.1/modules/text_renderer/platform_fonts.h
+@@ -55,9 +55,9 @@
  # define SYSTEM_DEFAULT_MONOSPACE_FONT_FILE "/system/fonts/DroidSansMono.ttf"
  # define SYSTEM_DEFAULT_MONOSPACE_FAMILY "Droid Sans Mono"
  #else

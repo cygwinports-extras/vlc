@@ -1,8 +1,8 @@
-inherit qt4
+inherit qt5
 
 NAME="vlc"
-VERSION=2.1.5
-RELEASE=2
+VERSION=2.2.1
+RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="VideoLAN multimedia player"
 DESCRIPTION="VLC media player is a highly portable multimedia player for
@@ -15,16 +15,17 @@ SRC_URI="http://downloads.videolan.org/pub/videolan/vlc/${VERSION%[a-z]}/vlc-${V
 SRC_DIR="vlc-${VERSION%[a-z]}"
 PATCH_URI="
 	2.1.5-configure.patch
-	2.1.5-fonts.patch
-	2.1.5-misc.patch
+	2.2.1-fonts.patch
+	2.2.1-misc.patch
 	2.1.5-module-cache.patch
 	2.1.5-symbols.patch
+	2.2.1-strerror.patch
 "
 
 PKG_NAMES="vlc vlc-gui vlc-devel"
 vlc_SUMMARY="${SUMMARY} (command-line interfaces)"
 vlc_REQUIRES="font-freefont-ttf"
-vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2* --exclude=*globalhotkeys*
+vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2*
               --exclude=*panoramix* --exclude=*projectm* --exclude=*sdl*
               --exclude=*xcb* --exclude=cygnotify* --exclude=plugins.dat
               etc/postinstall/ etc/preremove/ usr/bin/cvlc usr/bin/cygvlc*
@@ -33,7 +34,7 @@ vlc_CONTENTS="--exclude=*qt4* --exclude=*skins2* --exclude=*globalhotkeys*
 vlc_gui_SUMMARY="${SUMMARY} (GUIs)"
 vlc_gui_CONTENTS="etc/postinstall/ usr/bin/qvlc usr/bin/svlc
                   usr/lib/vlc/plugins/*/*qt4* usr/lib/vlc/plugins/*/*skins2*
-                  usr/lib/vlc/plugins/*/*globalhotkeys* usr/lib/vlc/plugins/*/*panoramix*
+                  usr/lib/vlc/plugins/*/*panoramix*
                   usr/lib/vlc/plugins/*/*sdl* usr/lib/vlc/plugins/*/*projectm*
                   usr/lib/vlc/plugins/*/*xcb* usr/lib/vlc/plugins/*/cygnotify*
                   usr/share/applications/ usr/share/icons/
@@ -48,9 +49,6 @@ DIFF_EXCLUDES="m4"
 CYGCONF_ARGS+="
   --disable-maintainer-mode
   --disable-rpath
-  ac_cv_path_MOC=${QT4_MOC}
-  ac_cv_path_RCC=${QT4_RCC}
-  ac_cv_path_UIC=${QT4_UIC}
 "
 
 for y in a52 avcodec avformat bluray bonjour dbus \

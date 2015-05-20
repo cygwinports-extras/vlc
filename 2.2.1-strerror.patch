@@ -1,0 +1,22 @@
+--- origsrc/vlc-2.2.1/src/posix/error.c	2014-08-14 02:20:04.000000000 -0500
++++ src/vlc-2.2.1/src/posix/error.c	2015-05-19 17:35:10.058090400 -0500
+@@ -31,6 +31,11 @@
+ 
+ static const char *vlc_strerror_l(int errnum, const char *lname)
+ {
++#ifdef __CYGWIN__
++    int buflen = 256;
++    const char *buf = (const char *) malloc (buflen);
++    strerror_r (errnum, buf, buflen);
++#else
+     int saved_errno = errno;
+     locale_t loc = newlocale(LC_MESSAGES_MASK, lname, (locale_t)0);
+ 
+@@ -51,6 +56,7 @@ static const char *vlc_strerror_l(int er
+     const char *buf = strerror_l(errnum, loc);
+ 
+     freelocale(loc);
++#endif
+     return buf;
+ }
+ 

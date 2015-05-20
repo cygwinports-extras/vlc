@@ -1,0 +1,8 @@
+--- origsrc/vlc-2.2.1/modules/misc/Modules.am	2014-11-16 12:57:59.000000000 -0600
++++ src/vlc-2.2.1/modules/misc/Modules.am	2015-05-19 14:42:59.000000000 -0600
+@@ -34,3 +34,3 @@ libxdg_screensaver_plugin_la_SOURCES = i
+ if HAVE_XCB
+-misc_LTLIBRARIES += libxdg_screensaver_plugin.la
++EXTRA_LTLIBRARIES += libxdg_screensaver_plugin.la
+ endif
+ 
